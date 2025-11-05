@@ -1,10 +1,12 @@
+export type Day = {
+  date: string;
+  isCurrentMonth?: boolean;
+  isToday?: boolean;
+};
+
 export type Month = {
   name: string;
-  days: {
-    date: string;
-    isCurrentMonth?: boolean;
-    isToday?: boolean;
-  }[];
+  days: Day[];
 };
 
 export const months: Month[] = [
