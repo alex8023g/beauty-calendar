@@ -3,8 +3,10 @@ import { Hour } from './Hour';
 import { useState } from 'react';
 import Task from './Task';
 
+export type Time = { hour: string; minute: string } | null;
+
 export default function TimePicker() {
-  const [time, setTime] = useState<{ hour: string; minute: string } | null>(null);
+  const [time, setTime] = useState<Time>(null);
   return (
     <div className='flex h-full flex-col'>
       <header className='flex flex-none items-center justify-between border-b border-gray-200 px-6 py-4 dark:border-white/10 dark:bg-gray-800/50 dark:max-md:border-white/15'>
@@ -312,7 +314,7 @@ export default function TimePicker() {
                 <Button variant='outline'>Отменить</Button>
                 <Button variant='default'>Добавить</Button>
               </div> */}
-              <Task />
+              <Task time={time} setTime={setTime} />
             </div>
           )}
         </div>

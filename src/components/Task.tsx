@@ -1,6 +1,15 @@
 import { Button } from './ui/button';
+import { SelectEventType } from './SelectEventType';
+import type { Dispatch, SetStateAction } from 'react';
+import type { Time } from './TimePicker';
 
-export default function Task() {
+export default function Task({
+  time,
+  setTime,
+}: {
+  time: Time;
+  setTime: Dispatch<SetStateAction<Time>>;
+}) {
   return (
     <div>
       {/* <div className='px-4 sm:px-0'>
@@ -18,7 +27,7 @@ export default function Task() {
               Время
             </dt>
             <dd className=' text-sm/6 text-gray-700 /col-span-2 mt-0 dark:text-gray-400 text-right'>
-              19:30
+              {time?.hour}:{time?.minute}
             </dd>
           </div>
           <div className='py-6 grid grid-cols-2 gap-4 px-0'>
@@ -26,7 +35,7 @@ export default function Task() {
               Событие
             </dt>
             <dd className='text-sm/6 text-gray-700 /col-span-2 mt-0 dark:text-gray-400 text-right'>
-              Маникюр
+              <SelectEventType />
             </dd>
           </div>
           <div className='py-6 grid grid-cols-2 gap-4 px-0'>
@@ -56,7 +65,7 @@ export default function Task() {
         </dl>
       </div>
       <div className='flex gap-2 mt-4 '>
-        <Button variant='outline' className='grow'>
+        <Button variant='outline' className='grow' onClick={() => setTime(null)}>
           Отменить
         </Button>
         <Button variant='default' className='grow'>
