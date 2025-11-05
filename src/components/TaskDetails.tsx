@@ -22,50 +22,54 @@ export function TaskDetails({
       </div> */}
       <div className='/mt-6 /border-t border-gray-100 dark:border-white/10'>
         <dl className='divide-y divide-gray-100 dark:divide-white/10'>
-          <div className='py-4 grid grid-cols-2 gap-4 px-0'>
+          <div className='grid grid-cols-2 gap-4 px-0 py-4'>
             <dt className='text-sm/6 font-medium text-gray-900 dark:text-gray-100'>
               Время
             </dt>
-            <dd className=' text-sm/6 text-gray-700 /col-span-2 mt-0 dark:text-gray-400 text-right'>
+            <dd className='/col-span-2 mt-0 text-right text-sm/6 text-gray-700 dark:text-gray-400'>
               {time?.hour}:{time?.minute}
             </dd>
           </div>
-          <div className='py-4 grid grid-cols-2 gap-4 px-0'>
+          <div className='grid grid-cols-2 gap-4 px-0 py-4'>
             <dt className='text-sm/6 font-medium text-gray-900 dark:text-gray-100'>
               Событие
             </dt>
-            <dd className='text-sm/6 text-gray-700 /col-span-2 mt-0 dark:text-gray-400 text-right'>
+            <dd className='/col-span-2 mt-0 text-right text-sm/6 text-gray-700 dark:text-gray-400'>
               <SelectEventType />
             </dd>
           </div>
-          <div className='py-4 grid grid-cols-2 gap-4 px-0'>
+          <div className='grid grid-cols-2 gap-4 px-0 py-4'>
             <dt className='text-sm/6 font-medium text-gray-900 dark:text-gray-100'>
               Продолжительность
             </dt>
-            <dd className='text-sm/6 text-gray-700 /col-span-2 mt-0 dark:text-gray-400 text-right'>
+            <dd className='/col-span-2 mt-0 text-right text-sm/6 text-gray-700 dark:text-gray-400'>
               1 час
             </dd>
           </div>
-          <div className='py-4 grid grid-cols-2 gap-4 px-0'>
+          <div className='grid grid-cols-2 gap-4 px-0 py-4'>
             <dt className='text-sm/6 font-medium text-gray-900 dark:text-gray-100'>
               Напомнить
             </dt>
-            <dd className='text-sm/6 text-gray-700 /col-span-2 mt-0 dark:text-gray-400 text-right'>
+            <dd className='/col-span-2 mt-0 text-right text-sm/6 text-gray-700 dark:text-gray-400'>
               за 2 часа
             </dd>
           </div>
-          <div className='py-4 grid grid-cols-2 gap-4 px-0'>
+          <div className='grid grid-cols-2 gap-4 px-0 py-4'>
             <dt className='text-sm/6 font-medium text-gray-900 dark:text-gray-100'>
               Напомнить
             </dt>
-            <dd className='text-sm/6 text-gray-700 /col-span-2 mt-0 dark:text-gray-400 text-right'>
+            <dd className='/col-span-2 mt-0 text-right text-sm/6 text-gray-700 dark:text-gray-400'>
               за 1 день
             </dd>
           </div>
         </dl>
       </div>
-      <div className='flex gap-2 mt-4 '>
-        <Button variant='outline' className='grow' onClick={() => setTime(null)}>
+      <div className='mt-4 flex gap-2'>
+        <Button
+          variant='outline'
+          className='grow'
+          onClick={() => setTime(null)}
+        >
           Отменить
         </Button>
         <Button variant='default' className='grow'>
