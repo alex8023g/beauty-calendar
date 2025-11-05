@@ -1,7 +1,8 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid';
 import { Hour } from './Hour';
 import { useState } from 'react';
-import Task from './Task';
+import { TaskDetails } from './TaskDetails';
+import { EventItem } from './EventItem';
 
 export type Time = { hour: string; minute: string } | null;
 
@@ -45,7 +46,8 @@ export default function TimePicker() {
               <ChevronRightIcon aria-hidden='true' className='size-5' />
             </button>
           </div>
-          {/* <div className='hidden md:ml-4 md:flex md:items-center'>
+          {/*
+           <div className='hidden md:ml-4 md:flex md:items-center'>
             <Menu as='div' className='relative'>
               <MenuButton
                 type='button'
@@ -105,8 +107,10 @@ export default function TimePicker() {
             >
               Add event
             </button>
-          </div> */}
-          {/* <div className='ml-6 md:hidden'>
+          </div> 
+          */}
+          {/*
+           <div className='ml-6 md:hidden'>
             <Menu as='div' className='relative'>
               <MenuButton className='relative flex items-center rounded-full text-gray-400 outline-offset-8 hover:text-gray-500 dark:text-gray-500 dark:hover:text-white'>
                 <span className='absolute -inset-2' />
@@ -179,51 +183,6 @@ export default function TimePicker() {
       </header>
       <div className='isolate flex flex-auto overflow-hidden bg-white dark:bg-gray-900'>
         <div className='flex flex-auto flex-col overflow-auto'>
-          {/* <div className='sticky top-0 z-10 grid flex-none grid-cols-7 bg-white text-xs text-gray-500 shadow-sm ring-1 ring-black/5 md:hidden dark:bg-gray-900 dark:text-gray-400 dark:shadow-none dark:ring-white/20'>
-            <button type='button' className='flex flex-col items-center pt-3 pb-1.5'>
-              <span>W</span>
-
-              <span className='mt-3 flex size-8 items-center justify-center rounded-full text-base font-semibold text-gray-900 dark:text-white'>
-                19
-              </span>
-            </button>
-            <button type='button' className='flex flex-col items-center pt-3 pb-1.5'>
-              <span>T</span>
-              <span className='mt-3 flex size-8 items-center justify-center rounded-full text-base font-semibold text-indigo-600 dark:text-indigo-400'>
-                20
-              </span>
-            </button>
-            <button type='button' className='flex flex-col items-center pt-3 pb-1.5'>
-              <span>F</span>
-              <span className='mt-3 flex size-8 items-center justify-center rounded-full text-base font-semibold text-gray-900 dark:text-white'>
-                21
-              </span>
-            </button>
-            <button type='button' className='flex flex-col items-center pt-3 pb-1.5'>
-              <span>S</span>
-              <span className='mt-3 flex size-8 items-center justify-center rounded-full bg-gray-900 text-base font-semibold text-white dark:bg-white dark:text-gray-900'>
-                22
-              </span>
-            </button>
-            <button type='button' className='flex flex-col items-center pt-3 pb-1.5'>
-              <span>S</span>
-              <span className='mt-3 flex size-8 items-center justify-center rounded-full text-base font-semibold text-gray-900 dark:text-white'>
-                23
-              </span>
-            </button>
-            <button type='button' className='flex flex-col items-center pt-3 pb-1.5'>
-              <span>M</span>
-              <span className='mt-3 flex size-8 items-center justify-center rounded-full text-base font-semibold text-gray-900 dark:text-white'>
-                24
-              </span>
-            </button>
-            <button type='button' className='flex flex-col items-center pt-3 pb-1.5'>
-              <span>T</span>
-              <span className='mt-3 flex size-8 items-center justify-center rounded-full text-base font-semibold text-gray-900 dark:text-white'>
-                25
-              </span>
-            </button>
-          </div> */}
           {!time && (
             <div className='flex w-full flex-auto'>
               <div className='w-14 flex-none bg-white ring-1 ring-gray-100 dark:bg-gray-900 dark:ring-white/5' />
@@ -244,8 +203,15 @@ export default function TimePicker() {
                   style={{ gridTemplateRows: '1.75rem repeat(288, minmax(0, 1fr)) auto' }}
                   className='col-start-1 col-end-2 row-start-1 grid grid-cols-1'
                 >
+                  <EventItem
+                    event={{
+                      type: 'Маникюр',
+                      time: { hour: 4, minute: 30 },
+                      duration: 1.25,
+                    }}
+                  />
                   <li
-                    style={{ gridRow: '74 / span 12' }}
+                    style={{ gridRow: '26 / span 12' }}
                     className='relative mt-px flex dark:before:pointer-events-none dark:before:absolute dark:before:inset-1 dark:before:z-0 dark:before:rounded-lg dark:before:bg-gray-900'
                   >
                     <a
@@ -314,7 +280,7 @@ export default function TimePicker() {
                 <Button variant='outline'>Отменить</Button>
                 <Button variant='default'>Добавить</Button>
               </div> */}
-              <Task time={time} setTime={setTime} />
+              <TaskDetails time={time} setTime={setTime} />
             </div>
           )}
         </div>

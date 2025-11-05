@@ -3,7 +3,7 @@ import { SelectEventType } from './SelectEventType';
 import type { Dispatch, SetStateAction } from 'react';
 import type { Time } from './TimePicker';
 
-export default function Task({
+export function TaskDetails({
   time,
   setTime,
 }: {
@@ -22,7 +22,7 @@ export default function Task({
       </div> */}
       <div className='/mt-6 /border-t border-gray-100 dark:border-white/10'>
         <dl className='divide-y divide-gray-100 dark:divide-white/10'>
-          <div className='py-6 grid grid-cols-2 gap-4 px-0'>
+          <div className='py-4 grid grid-cols-2 gap-4 px-0'>
             <dt className='text-sm/6 font-medium text-gray-900 dark:text-gray-100'>
               Время
             </dt>
@@ -30,7 +30,7 @@ export default function Task({
               {time?.hour}:{time?.minute}
             </dd>
           </div>
-          <div className='py-6 grid grid-cols-2 gap-4 px-0'>
+          <div className='py-4 grid grid-cols-2 gap-4 px-0'>
             <dt className='text-sm/6 font-medium text-gray-900 dark:text-gray-100'>
               Событие
             </dt>
@@ -38,7 +38,7 @@ export default function Task({
               <SelectEventType />
             </dd>
           </div>
-          <div className='py-6 grid grid-cols-2 gap-4 px-0'>
+          <div className='py-4 grid grid-cols-2 gap-4 px-0'>
             <dt className='text-sm/6 font-medium text-gray-900 dark:text-gray-100'>
               Продолжительность
             </dt>
@@ -46,7 +46,7 @@ export default function Task({
               1 час
             </dd>
           </div>
-          <div className='py-6 grid grid-cols-2 gap-4 px-0'>
+          <div className='py-4 grid grid-cols-2 gap-4 px-0'>
             <dt className='text-sm/6 font-medium text-gray-900 dark:text-gray-100'>
               Напомнить
             </dt>
@@ -54,7 +54,7 @@ export default function Task({
               за 2 часа
             </dd>
           </div>
-          <div className='py-6 grid grid-cols-2 gap-4 px-0'>
+          <div className='py-4 grid grid-cols-2 gap-4 px-0'>
             <dt className='text-sm/6 font-medium text-gray-900 dark:text-gray-100'>
               Напомнить
             </dt>
