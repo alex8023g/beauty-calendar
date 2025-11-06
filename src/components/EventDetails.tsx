@@ -1,14 +1,21 @@
 import { Button } from './ui/button';
 import { SelectEventType } from './SelectEventType';
-import type { Dispatch, SetStateAction } from 'react';
-import type { Time } from './DaySchedule';
+import { type Dispatch, type SetStateAction } from 'react';
+import type { Event } from './DaySchedule';
+import { Preferences } from '@capacitor/preferences';
 
-export function TaskDetails({
-  time,
-  setTime,
+export function EventDetails({
+  event,
+  setEvent,
+  events,
+  setEvents,
+  setIsDetailsOpen,
 }: {
-  time: Time;
-  setTime: Dispatch<SetStateAction<Time>>;
+  event: Event;
+  setEvent: Dispatch<SetStateAction<Event>>;
+  events: Event[];
+  setEvents: Dispatch<SetStateAction<Event[]>>;
+  setIsDetailsOpen: Dispatch<SetStateAction<boolean>>;
 }) {
   return (
     <div>
@@ -27,7 +34,7 @@ export function TaskDetails({
               Время
             </dt>
             <dd className='/col-span-2 mt-0 text-right text-sm/6 text-gray-700 dark:text-gray-400'>
-              {time?.hour}:{time?.minute}
+              {event.time.hour}:{event.time.minute}
             </dd>
           </div>
           <div className='grid grid-cols-2 gap-4 px-0 py-4'>
@@ -35,7 +42,7 @@ export function TaskDetails({
               Событие
             </dt>
             <dd className='/col-span-2 mt-0 text-right text-sm/6 text-gray-700 dark:text-gray-400'>
-              <SelectEventType />
+              <SelectEventType event={event} setEvent={setEvent} />
             </dd>
           </div>
           <div className='grid grid-cols-2 gap-4 px-0 py-4'>
@@ -68,11 +75,29 @@ export function TaskDetails({
         <Button
           variant='outline'
           className='grow'
-          onClick={() => setTime(null)}
+          onClick={() => setIsDetailsOpen(false)}
         >
           Отменить
         </Button>
-        <Button variant='default' className='grow'>
+        <Button
+          variant='default'
+          className='grow'
+          onClick={async () => {
+            // const prevEventsJson = await Preferences.get({
+            //   key: 'events',
+            // });
+            // const prevEvents: Event[] = prevEventsJson.value
+            //   ? JSON.parse(prevEventsJson.value)
+            //   : [];
+
+            Preferences.set({
+              key: 'events',
+              value: JSON.stringify([...events, event]),
+            });
+            setEvents((prev) => [...prev, event]);
+            setIsDetailsOpen(false);
+          }}
+        >
           Добавить
         </Button>
       </div>
