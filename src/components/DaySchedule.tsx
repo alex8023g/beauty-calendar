@@ -3,25 +3,24 @@ import { Hour } from './Hour';
 import { useState } from 'react';
 import { TaskDetails } from './TaskDetails';
 import { EventItem } from './EventItem';
+import type { Day } from '@/lib/createYearCalendar';
+import dayjs from 'dayjs';
 
 export type Time = { hour: string; minute: string } | null;
 
-export function DaySchedule() {
+export function DaySchedule({ day }: { day: Day }) {
   const [time, setTime] = useState<Time>(null);
   return (
     <div className='flex h-full flex-col'>
       <header className='flex flex-none items-center justify-between border-b border-gray-200 px-6 py-4 dark:border-white/10 dark:bg-gray-800/50 dark:max-md:border-white/15'>
         <div>
           <h1 className='text-base font-semibold text-gray-900 dark:text-white'>
-            <time dateTime='2022-01-22' className='sm:hidden'>
-              14 ноября 2026
-            </time>
-            <time dateTime='2022-01-22' className='hidden sm:inline'>
-              14 ноября 2026
+            <time dateTime={day.dateString} className=''>
+              {dayjs(day.dateString).format('DD MMMM YYYY')}
             </time>
           </h1>
           <p className='mt-1 text-sm text-gray-500 dark:text-gray-400'>
-            пятница
+            {dayjs(day.dateString).format('dddd')}
           </p>
         </div>
         <div className='flex items-center'>

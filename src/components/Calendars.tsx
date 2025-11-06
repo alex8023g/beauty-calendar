@@ -1,7 +1,21 @@
-import { months } from '../constants/constants';
-import { Month } from './Month';
+import { createYearCalendar, type Month } from '@/lib/createYearCalendar';
+import { createDaysArr } from '@/lib/createDaysArr';
+import { useEffect, useState } from 'react';
+import { MonthCalendar } from './MonthCalendar';
 
 export function Calendars() {
+  const [months2, setMonths2] = useState<Month[]>([]);
+
+  useEffect(() => {
+    (async () => {
+      const days = await createDaysArr({ year: 2025 });
+      console.log('🚀 ~ days:', days);
+      const monthsSt = createYearCalendar({ year: 2025, days });
+      console.log('🚀 ~ monthsSt:', monthsSt);
+      setMonths2(monthsSt);
+    })();
+  }, []);
+
   return (
     <div>
       {/* <header className='flex items-center justify-between border-b border-gray-200 px-6 py-4 dark:border-white/10 dark:bg-gray-800/50'>
@@ -166,8 +180,8 @@ export function Calendars() {
       </header> */}
       <div className='bg-white dark:bg-gray-900'>
         <div className='mx-auto grid max-w-3xl grid-cols-1 gap-x-8 gap-y-16 px-4 py-16 sm:grid-cols-2 sm:px-6 xl:max-w-none xl:grid-cols-3 xl:px-8 2xl:grid-cols-4'>
-          {months.map((month) => (
-            <Month key={month.name} month={month} />
+          {months2.map((month) => (
+            <MonthCalendar key={month.monthName} month={month} />
           ))}
         </div>
       </div>

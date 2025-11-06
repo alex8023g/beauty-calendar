@@ -6,24 +6,31 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 import { DaySchedule } from '@/components/DaySchedule';
-import type { Day } from '@/constants/constants';
+import type { Day } from '@/lib/createYearCalendar';
+import dayjs from 'dayjs';
 
 export function DayBtn({ day }: { day: Day }) {
   return (
     <Sheet>
       <SheetTrigger asChild>
         <button
-          key={day.date}
+          key={day.dateString}
           type='button'
-          data-is-today={day.isToday ? '' : undefined}
-          data-is-current-month={day.isCurrentMonth ? '' : undefined}
+          data-is-today={
+            dayjs().format('YYYY-MM-DD') === day.dateString ? '' : undefined
+          }
+          // data-is-current-month={day?.monthDay ? '' : undefined}
+          data-is-current-month=''
           className='relative bg-gray-50 py-1.5 text-gray-400 first:rounded-tl-lg last:rounded-br-lg hover:bg-gray-100 focus:z-10 data-is-current-month:bg-white data-is-current-month:text-gray-900 data-is-current-month:hover:bg-gray-100 nth-36:rounded-bl-lg nth-7:rounded-tr-lg dark:bg-gray-900/75 dark:text-gray-500 dark:hover:bg-gray-900/25 dark:data-is-current-month:bg-gray-900 dark:data-is-current-month:text-gray-100 dark:data-is-current-month:hover:bg-gray-900/50'
+          style={{
+            color: day?.isWeekend ? 'red' : day?.isHoliday ? 'red' : '',
+          }}
         >
           <time
-            dateTime={day.date}
+            dateTime={day.dateString}
             className='mx-auto flex size-7 items-center justify-center rounded-full in-data-is-today:bg-indigo-600 in-data-is-today:font-semibold in-data-is-today:text-white dark:in-data-is-today:bg-indigo-500'
           >
-            {day.date?.split('-').pop()?.replace(/^0/, '')}
+            {day.dateString?.split('-').pop()?.replace(/^0/, '')}
           </time>
         </button>
       </SheetTrigger>
@@ -35,7 +42,7 @@ export function DayBtn({ day }: { day: Day }) {
             remove your data from our servers.
           </SheetDescription> */}
         </SheetHeader>
-        <DaySchedule />
+        <DaySchedule day={day} />
       </SheetContent>
     </Sheet>
   );
