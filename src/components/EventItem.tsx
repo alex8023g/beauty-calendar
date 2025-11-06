@@ -1,4 +1,5 @@
 export type Event = {
+  dateString: string;
   type: string;
   time: { hour: number; minute: number };
   duration: number;
@@ -11,7 +12,7 @@ export function EventItem({ event }: { event: Event }) {
           event.duration * 12
         }`,
       }}
-      className='relative mt-px flex dark:before:pointer-events-none dark:before:absolute dark:before:inset-1 dark:before:z-0 dark:before:rounded-lg dark:before:bg-gray-900 z-20'
+      className='relative z-20 mt-px flex dark:before:pointer-events-none dark:before:absolute dark:before:inset-1 dark:before:z-0 dark:before:rounded-lg dark:before:bg-gray-900'
     >
       <a
         href='#'
