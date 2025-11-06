@@ -5,10 +5,10 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
-import TimePicker from '@/components/TimePicker';
-import type { Day } from '@/constants';
+import { DaySchedule } from '@/components/DaySchedule';
+import type { Day } from '@/constants/constants';
 
-export function TimePickerSheet({ day }: { day: Day }) {
+export function DayBtn({ day }: { day: Day }) {
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -29,13 +29,13 @@ export function TimePickerSheet({ day }: { day: Day }) {
       </SheetTrigger>
       <SheetContent side='bottom' className='h-11/12'>
         <SheetHeader className='pb-0'>
-          <SheetTitle>Добавить событие?</SheetTitle>
+          <SheetTitle></SheetTitle>
           {/* <SheetDescription>
             This action cannot be undone. This will permanently delete your account and
             remove your data from our servers.
           </SheetDescription> */}
         </SheetHeader>
-        <TimePicker />
+        <DaySchedule />
       </SheetContent>
     </Sheet>
   );

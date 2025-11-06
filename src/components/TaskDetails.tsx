@@ -1,7 +1,7 @@
 import { Button } from './ui/button';
 import { SelectEventType } from './SelectEventType';
 import type { Dispatch, SetStateAction } from 'react';
-import type { Time } from './TimePicker';
+import type { Time } from './DaySchedule';
 
 export function TaskDetails({
   time,

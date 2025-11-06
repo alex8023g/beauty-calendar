@@ -6,7 +6,7 @@ import { EventItem } from './EventItem';
 
 export type Time = { hour: string; minute: string } | null;
 
-export default function TimePicker() {
+export function DaySchedule() {
   const [time, setTime] = useState<Time>(null);
   return (
     <div className='flex h-full flex-col'>
@@ -20,7 +20,9 @@ export default function TimePicker() {
               14 ноября 2026
             </time>
           </h1>
-          <p className='mt-1 text-sm text-gray-500 dark:text-gray-400'>пятница</p>
+          <p className='mt-1 text-sm text-gray-500 dark:text-gray-400'>
+            пятница
+          </p>
         </div>
         <div className='flex items-center'>
           <div className='relative flex items-center rounded-md bg-white shadow-xs outline -outline-offset-1 outline-gray-300 md:items-stretch dark:bg-white/10 dark:shadow-none dark:outline-white/5'>
@@ -46,7 +48,7 @@ export default function TimePicker() {
               <ChevronRightIcon aria-hidden='true' className='size-5' />
             </button>
           </div>
-          {/*
+          {/* 
            <div className='hidden md:ml-4 md:flex md:items-center'>
             <Menu as='div' className='relative'>
               <MenuButton
@@ -189,7 +191,9 @@ export default function TimePicker() {
               <div className='grid flex-auto grid-cols-1 grid-rows-1'>
                 {/* Horizontal lines */}
                 <div
-                  style={{ gridTemplateRows: 'repeat(48, minmax(3.5rem, 1fr))' }}
+                  style={{
+                    gridTemplateRows: 'repeat(48, minmax(3.5rem, 1fr))',
+                  }}
                   className='col-start-1 col-end-2 row-start-1 grid divide-y divide-gray-100 dark:divide-white/5'
                 >
                   <div className='row-end-1 h-7' />
@@ -200,7 +204,10 @@ export default function TimePicker() {
 
                 {/* Events */}
                 <ol
-                  style={{ gridTemplateRows: '1.75rem repeat(288, minmax(0, 1fr)) auto' }}
+                  style={{
+                    gridTemplateRows:
+                      '1.75rem repeat(288, minmax(0, 1fr)) auto',
+                  }}
                   className='col-start-1 col-end-2 row-start-1 grid grid-cols-1'
                 >
                   <EventItem

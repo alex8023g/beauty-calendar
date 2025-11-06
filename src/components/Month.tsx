@@ -1,5 +1,5 @@
-import type { Month } from '../constants';
-import { TimePickerSheet } from './TimePickerSheet';
+import type { Month } from '../constants/constants';
+import { DayBtn } from '@/components/DayBtn';
 
 export function Month({ month }: { month: Month }) {
   return (
@@ -18,7 +18,7 @@ export function Month({ month }: { month: Month }) {
       </div>
       <div className='isolate mt-2 grid grid-cols-7 gap-px rounded-lg bg-gray-200 text-sm shadow-sm ring-1 ring-gray-200 dark:bg-white/10 dark:shadow-none dark:ring-white/10'>
         {month.days.map((day) => (
-          <TimePickerSheet key={day.date} day={day} />
+          <DayBtn key={day.date} day={day} />
         ))}
       </div>
     </section>
