@@ -8,8 +8,10 @@ import {
 import { DaySchedule } from '@/components/DaySchedule';
 import type { Day } from '@/lib/createYearCalendar';
 import dayjs from 'dayjs';
+import { useEventsStore } from '@/store/store';
 
 export function DayBtn({ day }: { day: Day }) {
+  const events = useEventsStore((state) => state.events);
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -32,6 +34,11 @@ export function DayBtn({ day }: { day: Day }) {
           >
             {day.dateString?.split('-').pop()?.replace(/^0/, '')}
           </time>
+          {events.some((event) => event.dateString === day.dateString) && (
+            <div className='absolute bottom-1 left-4 w-3 font-bold text-red-600'>
+              __
+            </div>
+          )}
         </button>
       </SheetTrigger>
       <SheetContent side='bottom' className='h-11/12'>

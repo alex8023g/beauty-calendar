@@ -1,15 +1,17 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid';
 import { Hour } from './Hour';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { EventDetails } from './EventDetails';
 import { EventItem } from './EventItem';
 import type { Day } from '@/lib/createYearCalendar';
 import dayjs from 'dayjs';
-import { Preferences } from '@capacitor/preferences';
+import { nanoid } from 'nanoid';
+import { useEventsStore } from '@/store/store';
 
 export type Time = { hour: number; minute: number };
 
 export type Event = {
+  id: string;
   dateString: string;
   time: { hour: number; minute: number };
   type: string;
@@ -21,6 +23,7 @@ export type Event = {
 export function DaySchedule({ day }: { day: Day }) {
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
   const [event, setEvent] = useState<Event>({
+    id: nanoid(),
     dateString: day.dateString,
     time: { hour: 0, minute: 0 },
     type: 'Маникюр',
@@ -28,15 +31,16 @@ export function DaySchedule({ day }: { day: Day }) {
     remainderOne: 2,
     remainderTwo: 24,
   });
-  const [events, setEvents] = useState<Event[]>([]);
-  useEffect(() => {
-    (async () => {
-      const { value } = await Preferences.get({ key: 'events' });
-      if (value) {
-        setEvents(JSON.parse(value));
-      }
-    })();
-  }, []);
+  // const [events, setEvents] = useState<Event[]>([]);
+  const events = useEventsStore((state) => state.events);
+  // useEffect(() => {
+  //   (async () => {
+  //     const { value } = await Preferences.get({ key: 'events' });
+  //     if (value) {
+  //       setEvents(JSON.parse(value));
+  //     }
+  //   })();
+  // }, []);
   return (
     <div className='flex h-full flex-col'>
       <header className='flex flex-none items-center justify-between border-b border-gray-200 px-6 py-4 dark:border-white/10 dark:bg-gray-800/50 dark:max-md:border-white/15'>
@@ -142,9 +146,9 @@ export function DaySchedule({ day }: { day: Day }) {
               </div> */}
               <EventDetails
                 event={event}
-                events={events}
                 setEvent={setEvent}
-                setEvents={setEvents}
+                events={events}
+                // setEvents={setEvents}
                 setIsDetailsOpen={setIsDetailsOpen}
               />
             </div>

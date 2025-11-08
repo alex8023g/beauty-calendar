@@ -3,20 +3,20 @@ import { SelectEventType } from './SelectEventType';
 import { type Dispatch, type SetStateAction } from 'react';
 import type { Event } from './DaySchedule';
 import { Preferences } from '@capacitor/preferences';
+import { useEventsStore } from '@/store/store';
 
 export function EventDetails({
   event,
   setEvent,
   events,
-  setEvents,
   setIsDetailsOpen,
 }: {
   event: Event;
   setEvent: Dispatch<SetStateAction<Event>>;
   events: Event[];
-  setEvents: Dispatch<SetStateAction<Event[]>>;
   setIsDetailsOpen: Dispatch<SetStateAction<boolean>>;
 }) {
+  const addEvent = useEventsStore((state) => state.addEvent);
   return (
     <div>
       {/* <div className='px-4 sm:px-0'>
@@ -83,18 +83,11 @@ export function EventDetails({
           variant='default'
           className='grow'
           onClick={async () => {
-            // const prevEventsJson = await Preferences.get({
-            //   key: 'events',
-            // });
-            // const prevEvents: Event[] = prevEventsJson.value
-            //   ? JSON.parse(prevEventsJson.value)
-            //   : [];
-
             Preferences.set({
               key: 'events',
               value: JSON.stringify([...events, event]),
             });
-            setEvents((prev) => [...prev, event]);
+            addEvent(event);
             setIsDetailsOpen(false);
           }}
         >

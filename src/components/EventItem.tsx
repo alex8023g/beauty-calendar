@@ -1,9 +1,5 @@
-export type Event = {
-  dateString: string;
-  type: string;
-  time: { hour: number; minute: number };
-  duration: number;
-};
+import type { Event } from './DaySchedule';
+
 export function EventItem({ event }: { event: Event }) {
   return (
     <li
