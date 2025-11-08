@@ -1,4 +1,4 @@
-import type { Dispatch, SetStateAction } from 'react';
+import { useEffect, useRef, type Dispatch, type SetStateAction } from 'react';
 import type { Event } from './DaySchedule';
 
 export function Hour({
@@ -10,9 +10,16 @@ export function Hour({
   setIsDetailsOpen: Dispatch<SetStateAction<boolean>>;
   setEvent: Dispatch<SetStateAction<Event>>;
 }) {
+  const el = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    if (hour === 12) {
+      el.current?.scrollIntoView({ block: 'center' });
+    }
+  }, []);
   return (
     <>
       <div
+        ref={el}
         className='z-10'
         onClick={() => {
           console.log('clicked', hour);

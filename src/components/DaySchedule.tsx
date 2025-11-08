@@ -33,14 +33,11 @@ export function DaySchedule({ day }: { day: Day }) {
   });
   // const [events, setEvents] = useState<Event[]>([]);
   const events = useEventsStore((state) => state.events);
-  // useEffect(() => {
-  //   (async () => {
-  //     const { value } = await Preferences.get({ key: 'events' });
-  //     if (value) {
-  //       setEvents(JSON.parse(value));
-  //     }
-  //   })();
-  // }, []);
+
+  const todayEvents = events.filter(
+    (event) => event.dateString === day.dateString,
+  );
+
   return (
     <div className='flex h-full flex-col'>
       <header className='flex flex-none items-center justify-between border-b border-gray-200 px-6 py-4 dark:border-white/10 dark:bg-gray-800/50 dark:max-md:border-white/15'>
@@ -80,6 +77,17 @@ export function DaySchedule({ day }: { day: Day }) {
           </div>
         </div>
       </header>
+      {todayEvents.length > 0 && (
+        <div className='bg-blue-300 pl-3 text-sm/6'>
+          {todayEvents.map((event) => (
+            <div>
+              <span>{String(event.time?.hour).padStart(2, '0')}:</span>
+              <span>{String(event.time?.minute).padStart(2, '0')} </span>
+              <span>{event.type}</span>
+            </div>
+          ))}
+        </div>
+      )}
       <div className='isolate flex flex-auto overflow-hidden bg-white dark:bg-gray-900'>
         <div className='flex flex-auto flex-col overflow-auto'>
           {!isDetailsOpen && (
@@ -122,11 +130,9 @@ export function DaySchedule({ day }: { day: Day }) {
                       duration: 1.25,
                     }}
                   /> */}
-                    {events
-                      .filter((event) => event.dateString === day.dateString)
-                      .map((event) => (
-                        <EventItem key={event.dateString} event={event} />
-                      ))}
+                    {todayEvents.map((event) => (
+                      <EventItem key={event.dateString} event={event} />
+                    ))}
                   </ol>
                 )}
               </div>
