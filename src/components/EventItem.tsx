@@ -23,8 +23,8 @@ export function EventItem({
         setIsDetailsOpen(true);
       }}
     >
-      <a
-        href='#'
+      <button
+        // href='#'
         className='group absolute inset-1 flex flex-col overflow-y-auto rounded-lg bg-blue-50 p-2 text-xs/5 hover:bg-blue-100 dark:bg-blue-600/15 dark:hover:bg-blue-600/20'
       >
         <p className='order-1 font-semibold text-blue-700 dark:text-blue-300'>
@@ -36,7 +36,7 @@ export function EventItem({
             {String(event.time?.minute).padStart(2, '0')}
           </time>
         </p>
-      </a>
+      </button>
     </li>
   );
 }
