@@ -105,7 +105,14 @@ export function EventDetails({
             onClick={async () => {
               Preferences.set({
                 key: 'events',
-                value: JSON.stringify([...events, selectedEvent]),
+                value: JSON.stringify([
+                  ...events,
+                  {
+                    ...selectedEvent,
+                    id: nanoid(),
+                    dateString: day.dateString,
+                  },
+                ]),
               });
               addEvent({
                 ...selectedEvent,
