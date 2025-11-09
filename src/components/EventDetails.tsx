@@ -34,7 +34,7 @@ export function EventDetails({
               Время
             </dt>
             <dd className='/col-span-2 mt-0 text-right text-sm/6 text-gray-700 dark:text-gray-400'>
-              {event.time.hour}:{event.time.minute}
+              {event.time.hour}:{String(event.time?.minute).padStart(2, '0')}
             </dd>
           </div>
           <div className='grid grid-cols-2 gap-4 px-0 py-4'>

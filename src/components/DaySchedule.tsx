@@ -7,6 +7,7 @@ import type { Day } from '@/lib/createYearCalendar';
 import dayjs from 'dayjs';
 import { nanoid } from 'nanoid';
 import { useEventsStore } from '@/store/store';
+import { Transition } from '@headlessui/react';
 
 export type Time = { hour: number; minute: number };
 
@@ -77,52 +78,53 @@ export function DaySchedule({ day }: { day: Day }) {
           </div>
         </div>
       </header>
-      {todayEvents.length > 0 && (
-        <div className='bg-blue-300 pl-3 text-sm/6'>
-          {todayEvents.map((event) => (
-            <div>
-              <span>{String(event.time?.hour).padStart(2, '0')}:</span>
-              <span>{String(event.time?.minute).padStart(2, '0')} </span>
-              <span>{event.type}</span>
-            </div>
-          ))}
-        </div>
-      )}
-      <div className='isolate flex flex-auto overflow-hidden bg-white dark:bg-gray-900'>
-        <div className='flex flex-auto flex-col overflow-auto'>
-          {!isDetailsOpen && (
-            <div className='flex w-full flex-auto'>
-              <div className='w-14 flex-none bg-white ring-1 ring-gray-100 dark:bg-gray-900 dark:ring-white/5' />
-              <div className='grid flex-auto grid-cols-1 grid-rows-1'>
-                {/* Horizontal lines */}
-                <div
-                  style={{
-                    gridTemplateRows: 'repeat(48, minmax(3.5rem, 1fr))',
-                  }}
-                  className='col-start-1 col-end-2 row-start-1 grid divide-y divide-gray-100 dark:divide-white/5'
-                >
-                  <div className='row-end-1 h-7' />
-                  {new Array(24).fill(0).map((_, i) => (
-                    <Hour
-                      key={i}
-                      hour={i}
-                      // setTime={setTime}
-                      setIsDetailsOpen={setIsDetailsOpen}
-                      setEvent={setEvent}
-                    />
-                  ))}
-                </div>
 
-                {/* Events */}
-                {events.length > 0 && (
-                  <ol
-                    style={{
-                      gridTemplateRows:
-                        '1.75rem repeat(288, minmax(0, 1fr)) auto',
-                    }}
-                    className='col-start-1 col-end-2 row-start-1 grid grid-cols-1'
-                  >
-                    {/* <EventItem
+      <div className='relative isolate flex flex-auto overflow-hidden bg-white dark:bg-gray-900'>
+        {todayEvents.length > 0 && !isDetailsOpen && (
+          <div className='absolute top-0 right-0 z-30 m-2 w-[360px] rounded-md bg-blue-300 pl-3 text-sm/6'>
+            {todayEvents.map((event) => (
+              <div className=''>
+                <span>{String(event.time?.hour).padStart(2, '0')}:</span>
+                <span>{String(event.time?.minute).padStart(2, '0')} </span>
+                <span>{event.type}</span>
+              </div>
+            ))}
+          </div>
+        )}
+        <div className='flex flex-auto flex-col overflow-auto'>
+          {/* {!isDetailsOpen && ( */}
+          <div className='flex w-full flex-auto'>
+            <div className='w-14 flex-none bg-white ring-1 ring-gray-100 dark:bg-gray-900 dark:ring-white/5' />
+            <div className='grid flex-auto grid-cols-1 grid-rows-1'>
+              {/* Horizontal lines */}
+              <div
+                style={{
+                  gridTemplateRows: 'repeat(48, minmax(3.5rem, 1fr))',
+                }}
+                className='col-start-1 col-end-2 row-start-1 grid divide-y divide-gray-100 dark:divide-white/5'
+              >
+                <div className='row-end-1 h-7' />
+                {new Array(24).fill(0).map((_, i) => (
+                  <Hour
+                    key={i}
+                    hour={i}
+                    // setTime={setTime}
+                    setIsDetailsOpen={setIsDetailsOpen}
+                    setEvent={setEvent}
+                  />
+                ))}
+              </div>
+
+              {/* Events */}
+              {events.length > 0 && (
+                <ol
+                  style={{
+                    gridTemplateRows:
+                      '1.75rem repeat(288, minmax(0, 1fr)) auto',
+                  }}
+                  className='col-start-1 col-end-2 row-start-1 grid grid-cols-1'
+                >
+                  {/* <EventItem
                     event={{
                       dateString: '2025-11-14',
                       type: 'Маникюр',
@@ -130,26 +132,17 @@ export function DaySchedule({ day }: { day: Day }) {
                       duration: 1.25,
                     }}
                   /> */}
-                    {todayEvents.map((event) => (
-                      <EventItem key={event.dateString} event={event} />
-                    ))}
-                  </ol>
-                )}
-              </div>
+                  {todayEvents.map((event) => (
+                    <EventItem key={event.dateString} event={event} />
+                  ))}
+                </ol>
+              )}
             </div>
-          )}
-          {isDetailsOpen && (
-            <div className='flex w-full flex-col p-4 pt-0'>
-              {/* <div>
-                время: {time.hour}:{time.minute}
-              </div>
-              <div> услуга: маникюр </div>
-              <div> напомнить: за 2 часа </div>
-              <div> напомнить: за 1 день </div>
-              <div className='flex gap-2 mt-4'>
-                <Button variant='outline'>Отменить</Button>
-                <Button variant='default'>Добавить</Button>
-              </div> */}
+          </div>
+          {/* )} */}
+          {/* {isDetailsOpen && ( */}
+          <Transition show={isDetailsOpen}>
+            <div className='absolute top-0 left-0 z-40 flex h-full w-full flex-col bg-white p-4 pt-0 transition duration-300 ease-in data-closed:opacity-0 dark:bg-gray-900'>
               <EventDetails
                 event={event}
                 setEvent={setEvent}
@@ -158,7 +151,8 @@ export function DaySchedule({ day }: { day: Day }) {
                 setIsDetailsOpen={setIsDetailsOpen}
               />
             </div>
-          )}
+          </Transition>
+          {/* )} */}
         </div>
       </div>
     </div>
