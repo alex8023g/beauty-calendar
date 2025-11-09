@@ -1,32 +1,30 @@
 import { Button } from './ui/button';
 import { SelectEventType } from './SelectEventType';
 import { type Dispatch, type SetStateAction } from 'react';
-import type { Event } from './DaySchedule';
 import { Preferences } from '@capacitor/preferences';
 import { useEventsStore } from '@/store/store';
+import type { Event } from '@/types';
+import type { Day } from '@/lib/createYearCalendar';
+import { nanoid } from 'nanoid';
 
 export function EventDetails({
-  event,
-  setEvent,
+  day,
+  // event,
+  // setEvent,
   events,
   setIsDetailsOpen,
 }: {
-  event: Event;
-  setEvent: Dispatch<SetStateAction<Event>>;
+  day: Day;
+  // event: Event;
+  // setEvent: Dispatch<SetStateAction<Event>>;
   events: Event[];
   setIsDetailsOpen: Dispatch<SetStateAction<boolean>>;
 }) {
+  const selectedEvent = useEventsStore((state) => state.selectedEvent);
   const addEvent = useEventsStore((state) => state.addEvent);
+  const deleteEvent = useEventsStore((state) => state.deleteEvent);
   return (
-    <div>
-      {/* <div className='px-4 sm:px-0'>
-        <h3 className='text-base/7 font-semibold text-gray-900 dark:text-white'>
-          Добавить событие
-        </h3>
-        <p className='mt-1 max-w-2xl text-sm/6 text-gray-500 dark:text-gray-400'>
-          Personal details and application.
-        </p>
-      </div> */}
+    <div className='/border flex h-full flex-col justify-between pb-10'>
       <div className='/mt-6 /border-t border-gray-100 dark:border-white/10'>
         <dl className='divide-y divide-gray-100 dark:divide-white/10'>
           <div className='grid grid-cols-2 gap-4 px-0 py-4'>
@@ -34,7 +32,8 @@ export function EventDetails({
               Время
             </dt>
             <dd className='/col-span-2 mt-0 text-right text-sm/6 text-gray-700 dark:text-gray-400'>
-              {event.time.hour}:{String(event.time?.minute).padStart(2, '0')}
+              {selectedEvent.time.hour}:
+              {String(selectedEvent.time?.minute).padStart(2, '0')}
             </dd>
           </div>
           <div className='grid grid-cols-2 gap-4 px-0 py-4'>
@@ -42,7 +41,7 @@ export function EventDetails({
               Событие
             </dt>
             <dd className='/col-span-2 mt-0 text-right text-sm/6 text-gray-700 dark:text-gray-400'>
-              <SelectEventType event={event} setEvent={setEvent} />
+              <SelectEventType />
             </dd>
           </div>
           <div className='grid grid-cols-2 gap-4 px-0 py-4'>
@@ -75,24 +74,50 @@ export function EventDetails({
         <Button
           variant='outline'
           className='grow'
-          onClick={() => setIsDetailsOpen(false)}
-        >
-          Отменить
-        </Button>
-        <Button
-          variant='default'
-          className='grow'
-          onClick={async () => {
-            Preferences.set({
-              key: 'events',
-              value: JSON.stringify([...events, event]),
-            });
-            addEvent(event);
+          onClick={() => {
             setIsDetailsOpen(false);
+            // setDefaultEvent();
           }}
         >
-          Добавить
+          Закрыть
         </Button>
+        {selectedEvent.id ? (
+          <Button
+            variant='destructive'
+            className='grow'
+            onClick={() => {
+              Preferences.set({
+                key: 'events',
+                value: JSON.stringify(
+                  events.filter((event) => event.id !== selectedEvent.id),
+                ),
+              });
+              deleteEvent(selectedEvent.id);
+              setIsDetailsOpen(false);
+            }}
+          >
+            Удалить
+          </Button>
+        ) : (
+          <Button
+            variant='default'
+            className='grow'
+            onClick={async () => {
+              Preferences.set({
+                key: 'events',
+                value: JSON.stringify([...events, selectedEvent]),
+              });
+              addEvent({
+                ...selectedEvent,
+                id: nanoid(),
+                dateString: day.dateString,
+              });
+              setIsDetailsOpen(false);
+            }}
+          >
+            Добавить
+          </Button>
+        )}
       </div>
     </div>
   );

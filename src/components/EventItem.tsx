@@ -1,6 +1,15 @@
-import type { Event } from './DaySchedule';
+import { useEventsStore } from '@/store/store';
+import type { Event } from '@/types';
+import type { Dispatch, SetStateAction } from 'react';
 
-export function EventItem({ event }: { event: Event }) {
+export function EventItem({
+  event,
+  setIsDetailsOpen,
+}: {
+  event: Event;
+  setIsDetailsOpen: Dispatch<SetStateAction<boolean>>;
+}) {
+  const setSelectedEvent = useEventsStore((state) => state.setSelectedEvent);
   return (
     <li
       style={{
@@ -9,6 +18,10 @@ export function EventItem({ event }: { event: Event }) {
         }`,
       }}
       className='relative z-20 mt-px flex dark:before:pointer-events-none dark:before:absolute dark:before:inset-1 dark:before:z-0 dark:before:rounded-lg dark:before:bg-gray-900'
+      onClick={() => {
+        setSelectedEvent(event);
+        setIsDetailsOpen(true);
+      }}
     >
       <a
         href='#'

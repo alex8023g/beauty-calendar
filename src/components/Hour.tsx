@@ -1,15 +1,17 @@
 import { useEffect, useRef, type Dispatch, type SetStateAction } from 'react';
-import type { Event } from './DaySchedule';
+import { useEventsStore } from '@/store/store';
 
 export function Hour({
   hour,
   setIsDetailsOpen,
-  setEvent,
+  // setEvent,
 }: {
   hour: number;
   setIsDetailsOpen: Dispatch<SetStateAction<boolean>>;
-  setEvent: Dispatch<SetStateAction<Event>>;
+  // setEvent: Dispatch<SetStateAction<Event>>;
 }) {
+  const selectedEvent = useEventsStore((state) => state.selectedEvent);
+  const setSelectedEvent = useEventsStore((state) => state.setSelectedEvent);
   const el = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
     if (hour === 12) {
@@ -25,10 +27,14 @@ export function Hour({
           console.log('clicked', hour);
           // setTime({ hour: String(hour).padStart(2, '0'), minute: '00' });
           // setTime({ hour, minute: 0 });
-          setEvent((prev) => ({
-            ...prev,
+          // setEvent((prev) => ({
+          //   ...prev,
+          //   time: { hour, minute: 0 },
+          // }));
+          setSelectedEvent({
+            ...selectedEvent,
             time: { hour, minute: 0 },
-          }));
+          });
           setIsDetailsOpen(true);
         }}
       >
@@ -41,10 +47,14 @@ export function Hour({
         // onClick={() => setTime({ hour: String(hour).padStart(2, '0'), minute: '30' })}
         onClick={() => {
           // setTime({ hour, minute: 30 });
-          setEvent((prev) => ({
-            ...prev,
+          // setEvent((prev) => ({
+          //   ...prev,
+          //   time: { hour, minute: 30 },
+          // }));
+          setSelectedEvent({
+            ...selectedEvent,
             time: { hour, minute: 30 },
-          }));
+          });
           setIsDetailsOpen(true);
         }}
       />

@@ -5,35 +5,15 @@ import { EventDetails } from './EventDetails';
 import { EventItem } from './EventItem';
 import type { Day } from '@/lib/createYearCalendar';
 import dayjs from 'dayjs';
-import { nanoid } from 'nanoid';
 import { useEventsStore } from '@/store/store';
 import { Transition } from '@headlessui/react';
 
 export type Time = { hour: number; minute: number };
 
-export type Event = {
-  id: string;
-  dateString: string;
-  time: { hour: number; minute: number };
-  type: string;
-  duration: number;
-  remainderOne: number;
-  remainderTwo: number;
-};
-
 export function DaySchedule({ day }: { day: Day }) {
   const [isDetailsOpen, setIsDetailsOpen] = useState(false);
-  const [event, setEvent] = useState<Event>({
-    id: nanoid(),
-    dateString: day.dateString,
-    time: { hour: 0, minute: 0 },
-    type: 'Маникюр',
-    duration: 1,
-    remainderOne: 2,
-    remainderTwo: 24,
-  });
-  // const [events, setEvents] = useState<Event[]>([]);
   const events = useEventsStore((state) => state.events);
+  const setDefaultEvent = useEventsStore((state) => state.setDefaultEvent);
 
   const todayEvents = events.filter(
     (event) => event.dateString === day.dateString,
@@ -110,13 +90,13 @@ export function DaySchedule({ day }: { day: Day }) {
                     hour={i}
                     // setTime={setTime}
                     setIsDetailsOpen={setIsDetailsOpen}
-                    setEvent={setEvent}
+                    // setEvent={setEvent}
                   />
                 ))}
               </div>
 
               {/* Events */}
-              {events.length > 0 && (
+              {todayEvents.length > 0 && (
                 <ol
                   style={{
                     gridTemplateRows:
@@ -124,16 +104,12 @@ export function DaySchedule({ day }: { day: Day }) {
                   }}
                   className='col-start-1 col-end-2 row-start-1 grid grid-cols-1'
                 >
-                  {/* <EventItem
-                    event={{
-                      dateString: '2025-11-14',
-                      type: 'Маникюр',
-                      time: { hour: 4, minute: 30 },
-                      duration: 1.25,
-                    }}
-                  /> */}
                   {todayEvents.map((event) => (
-                    <EventItem key={event.dateString} event={event} />
+                    <EventItem
+                      key={event.id}
+                      event={event}
+                      setIsDetailsOpen={setIsDetailsOpen}
+                    />
                   ))}
                 </ol>
               )}
@@ -141,11 +117,12 @@ export function DaySchedule({ day }: { day: Day }) {
           </div>
           {/* )} */}
           {/* {isDetailsOpen && ( */}
-          <Transition show={isDetailsOpen}>
+          <Transition show={isDetailsOpen} afterLeave={setDefaultEvent}>
             <div className='absolute top-0 left-0 z-40 flex h-full w-full flex-col bg-white p-4 pt-0 transition duration-300 ease-in data-closed:opacity-0 dark:bg-gray-900'>
               <EventDetails
-                event={event}
-                setEvent={setEvent}
+                day={day}
+                // event={event}
+                // setEvent={setEvent}
                 events={events}
                 // setEvents={setEvents}
                 setIsDetailsOpen={setIsDetailsOpen}
