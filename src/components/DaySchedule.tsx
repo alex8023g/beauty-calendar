@@ -88,6 +88,7 @@ export function DaySchedule({ day }: { day: Day }) {
                   <Hour
                     key={i}
                     hour={i}
+                    // day={day}
                     // setTime={setTime}
                     setIsDetailsOpen={setIsDetailsOpen}
                     // setEvent={setEvent}

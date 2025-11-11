@@ -18,12 +18,12 @@ type DayProto = {
   isWeekend: boolean;
 };
 
-export type Day = {
+type Day = {
   dateString: string;
+  year: number;
+  dayOfYear: number;
   isHoliday: boolean;
   isWeekend: boolean;
-  dayOfYear: number;
-  year: number;
 };
 
 function daysInYear(year: number) {

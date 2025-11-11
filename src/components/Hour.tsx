@@ -3,10 +3,12 @@ import { useEventsStore } from '@/store/store';
 
 export function Hour({
   hour,
+  // day,
   setIsDetailsOpen,
   // setEvent,
 }: {
   hour: number;
+  // day: Day;
   setIsDetailsOpen: Dispatch<SetStateAction<boolean>>;
   // setEvent: Dispatch<SetStateAction<Event>>;
 }) {
@@ -33,6 +35,7 @@ export function Hour({
           // }));
           setSelectedEvent({
             ...selectedEvent,
+            // id: nanoid(),
             time: { hour, minute: 0 },
           });
           setIsDetailsOpen(true);
@@ -53,6 +56,7 @@ export function Hour({
           // }));
           setSelectedEvent({
             ...selectedEvent,
+            // id: nanoid(),
             time: { hour, minute: 30 },
           });
           setIsDetailsOpen(true);
