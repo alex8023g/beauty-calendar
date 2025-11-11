@@ -25,7 +25,7 @@ export async function scheduleBasicNotification({
   // const now = new Date();
   // const futureDate = new Date(now.getTime() + 20000);
 
-  const notifications = events
+  let notifications = events
     .filter(
       (event) =>
         dayjs(event.dateString)
@@ -35,7 +35,7 @@ export async function scheduleBasicNotification({
     )
     .map((event, i) => {
       const eventDate = new Date(event.dateString);
-      eventDate.setHours(event.time.hour, event.time.minute, 0);
+      eventDate.setHours(event.time.hour - 2, event.time.minute, 0);
       return {
         title: `Напоминаем`,
         body: `Вы записаны на ${event.type} ${event.dateString} в ${event.time.hour}:${String(event.time?.minute).padStart(2, '0')}`,
@@ -47,25 +47,26 @@ export async function scheduleBasicNotification({
       };
     });
 
-  /*  const notifications = [
-    {
-      title: 'My First Notification',
-      body: 'This is a local notification example for iOS.',
-      id: 1, // Unique identifier for the notification
+  notifications = notifications.concat(
+    notifications.map((notification) => ({
+      ...notification,
+      id: notification.id + 1000,
       schedule: {
-        at: futureDate, // Schedule at a specific date/time
-        // Optionally, you can set 'every' for repeating notifications (e.g., 'day', 'week')
+        at: dayjs(notification.schedule.at)
+          .subtract(1, 'day')
+          .add(2, 'hour')
+          .toDate(),
       },
-      sound: 'beep.wav', // Optional: requires placing a sound file in the appropriate native resource folder
-      // extra: {
-      //   data: 'Any extra data you want to pass'
-      // }
-    },
-  ]; */
+    })),
+  );
+
   console.log('🚀 ~ scheduleBasicNotification ~ notifications:', notifications);
 
   const options: ScheduleOptions = {
-    notifications,
+    notifications: notifications.filter(
+      (notification) =>
+        dayjs(notification.schedule.at).valueOf() > dayjs().valueOf(),
+    ),
   };
 
   await LocalNotifications.schedule(options);
