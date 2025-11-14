@@ -4,8 +4,10 @@ import { type Dispatch, type SetStateAction } from 'react';
 import { Preferences } from '@capacitor/preferences';
 import { useEventsStore } from '@/store/store';
 import type { Event } from '@/types';
-import type { Day } from '@/lib/createYearCalendar';
 import { nanoid } from 'nanoid';
+import { scheduleBasicNotification } from '@/lib/localNotifications';
+import type { Day } from '@/lib/createYearCalendar';
+// import type { Day } from '@/lib/createYearCalendar';
 
 export function EventDetails({
   day,
@@ -21,8 +23,7 @@ export function EventDetails({
   setIsDetailsOpen: Dispatch<SetStateAction<boolean>>;
 }) {
   const selectedEvent = useEventsStore((state) => state.selectedEvent);
-  const addEvent = useEventsStore((state) => state.addEvent);
-  const deleteEvent = useEventsStore((state) => state.deleteEvent);
+  const setEvents = useEventsStore((state) => state.setEvents);
   return (
     <div className='/border flex h-full flex-col justify-between pb-10'>
       <div className='/mt-6 /border-t border-gray-100 dark:border-white/10'>
@@ -86,13 +87,18 @@ export function EventDetails({
             variant='destructive'
             className='grow'
             onClick={() => {
+              const updEvents: Event[] = events.filter(
+                (event) => event.id !== selectedEvent.id,
+              );
               Preferences.set({
                 key: 'events',
-                value: JSON.stringify(
-                  events.filter((event) => event.id !== selectedEvent.id),
-                ),
+                value: JSON.stringify(updEvents),
               });
-              deleteEvent(selectedEvent.id);
+              // deleteEvent(selectedEvent.id);
+              setEvents(updEvents);
+              scheduleBasicNotification({
+                events: updEvents,
+              });
               setIsDetailsOpen(false);
             }}
           >
@@ -103,22 +109,21 @@ export function EventDetails({
             variant='default'
             className='grow'
             onClick={async () => {
+              const updEvents: Event[] = [
+                ...events,
+                {
+                  ...selectedEvent,
+                  id: nanoid(),
+                  dateString: day.dateString,
+                },
+              ];
               Preferences.set({
                 key: 'events',
-                value: JSON.stringify([
-                  ...events,
-                  {
-                    ...selectedEvent,
-                    id: nanoid(),
-                    dateString: day.dateString,
-                  },
-                ]),
+                value: JSON.stringify(updEvents),
               });
-              addEvent({
-                ...selectedEvent,
-                id: nanoid(),
-                dateString: day.dateString,
-              });
+              // addEvent(newEvent);
+              setEvents(updEvents);
+              scheduleBasicNotification({ events: updEvents });
               setIsDetailsOpen(false);
             }}
           >

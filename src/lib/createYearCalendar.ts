@@ -6,9 +6,9 @@ dayjs.locale('ru');
 dayjs.extend(isoWeek);
 
 export type Day = {
+  dateString: string;
   monthDay: string;
   dayOfYear: number;
-  dateString: string;
   isHoliday: boolean;
   isWeekend: boolean;
   isSelected: boolean;
