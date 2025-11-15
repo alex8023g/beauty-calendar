@@ -1,0 +1,48 @@
+{
+  "fill" : {
+    "solid" : "display-p3:0.22328,0.22726,0.89264,1.00000"
+  },
+  "groups" : [
+    {
+      "layers" : [
+        {
+          "image-name" : "camera.macro 3.png",
+          "name" : "camera.macro 3",
+          "position" : {
+            "scale" : 1,
+            "translation-in-points" : [
+              235.768310546875,
+              274.7169189453125
+            ]
+          }
+        },
+        {
+          "image-name" : "calendar 4.png",
+          "name" : "calendar 4",
+          "position" : {
+            "scale" : 1.1,
+            "translation-in-points" : [
+              -2.011962890625,
+              0.6090087890625
+            ]
+          }
+        }
+      ],
+      "name" : "Group",
+      "shadow" : {
+        "kind" : "neutral",
+        "opacity" : 0.5
+      },
+      "translucency" : {
+        "enabled" : true,
+        "value" : 0.5
+      }
+    }
+  ],
+  "supported-platforms" : {
+    "circles" : [
+      "watchOS"
+    ],
+    "squares" : "shared"
+  }
+}

@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 // import { devtools } from 'zustand/middleware';
 import type { Event } from '@/types';
-import { defaultEvent } from '@/constants';
+import { defaultEvent } from '@/constants/defaultEvent';
 
 interface EventsState {
   // bears: number;

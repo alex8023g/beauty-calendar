@@ -20,7 +20,7 @@ type DayProto = {
 
 type Day = {
   dateString: string;
-  year: number;
+  // year: number;
   dayOfYear: number;
   isHoliday: boolean;
   isWeekend: boolean;
@@ -67,7 +67,7 @@ export async function createDaysArr({ year }: { year: number }) {
     res.push({
       dateString: dayDj.format(`YYYY-MM-DD`),
       dayOfYear: i + 1,
-      year,
+      // year,
       isHoliday,
       isWeekend,
     });

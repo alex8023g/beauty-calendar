@@ -10,6 +10,11 @@ const config: CapacitorConfig = {
       iconColor: '#488AFF',
       sound: 'beep.wav',
     },
+    StatusBar: {
+      overlaysWebView: false,
+      style: 'LIGHT',
+      backgroundColor: '#ffffffff',
+    },
   },
 };
 

@@ -7,14 +7,15 @@ dayjs.extend(isoWeek);
 
 export type Day = {
   dateString: string;
-  monthDay: string;
-  dayOfYear: number;
+  // monthDay: string | null;
+  dayOfYear: number | null;
   isHoliday: boolean;
   isWeekend: boolean;
   isSelected: boolean;
 };
 
 export type Month = {
+  year: number;
   monthNum: number;
   monthName: string;
   days: Day[];
@@ -40,11 +41,12 @@ export function createYearCalendar({
     const weekday = dayjs(`${year}-${month}-01`).isoWeekday();
 
     return {
+      year,
       monthNum: i,
       monthName,
       days: new Array(42)
         .fill({
-          monthDay: null,
+          // monthDay: null,
           dayOfYear: null,
           dateString: '',
           isSelected: false,
@@ -54,7 +56,8 @@ export function createYearCalendar({
         .map((day, j) =>
           j < weekday - 1 ||
           j > weekday + dayjs(`${year}-${month}-01`).daysInMonth() - 2
-            ? { ...day, monthDay: null }
+            ? // ? { ...day, monthDay: null }
+              day
             : {
                 ...day,
                 ...days.find(

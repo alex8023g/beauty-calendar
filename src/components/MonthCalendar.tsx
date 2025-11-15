@@ -4,10 +4,12 @@ import type { Month } from '@/lib/createYearCalendar';
 export function MonthCalendar({ month }: { month: Month }) {
   return (
     <section key={month.monthName} className='text-center'>
-      <h2 className='text-sm font-semibold text-gray-900 dark:text-white'>
-        {month.monthName}
+      <h2 className='sticky top-0 z-20 p-1 text-sm font-semibold text-gray-900 dark:text-white'>
+        <span className='rounded-lg bg-white px-3 py-1 backdrop-blur-lg backdrop-blur-md'>
+          {month.monthName} {month.year}
+        </span>
       </h2>
-      <div className='mt-6 grid grid-cols-7 text-xs/6 text-gray-500 dark:text-gray-400'>
+      <div className='mt-2 grid grid-cols-7 text-xs/6 text-gray-500 dark:text-gray-400'>
         <div>П</div>
         <div>В</div>
         <div>С</div>

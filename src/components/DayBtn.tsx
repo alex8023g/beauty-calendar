@@ -43,7 +43,7 @@ export function DayBtn({ day }: { day: Day }) {
             {day.dateString?.split('-').pop()?.replace(/^0/, '')}
           </time>
           {events.some((event) => event.dateString === day.dateString) && (
-            <div className='absolute bottom-1 left-4 w-3 font-bold text-red-600'>
+            <div className='absolute bottom-0.5 left-4 w-3 font-bold text-red-600'>
               __
             </div>
           )}

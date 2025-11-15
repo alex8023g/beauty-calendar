@@ -1,4 +1,3 @@
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid';
 import { Hour } from './Hour';
 import { useState } from 'react';
 import { EventDetails } from './EventDetails';
@@ -7,7 +6,8 @@ import type { Day } from '@/lib/createYearCalendar';
 import dayjs from 'dayjs';
 import { useEventsStore } from '@/store/store';
 import { Transition } from '@headlessui/react';
-
+import 'dayjs/locale/ru.js'; // Importing Russian locale for dayjs
+dayjs.locale('ru');
 export type Time = { hour: number; minute: number };
 
 export function DaySchedule({ day }: { day: Day }) {
@@ -32,7 +32,7 @@ export function DaySchedule({ day }: { day: Day }) {
             {dayjs(day.dateString).format('dddd')}
           </p>
         </div>
-        <div className='flex items-center'>
+        {/* <div className='flex items-center'>
           <div className='relative flex items-center rounded-md bg-white shadow-xs outline -outline-offset-1 outline-gray-300 md:items-stretch dark:bg-white/10 dark:shadow-none dark:outline-white/5'>
             <button
               type='button'
@@ -56,7 +56,7 @@ export function DaySchedule({ day }: { day: Day }) {
               <ChevronRightIcon aria-hidden='true' className='size-5' />
             </button>
           </div>
-        </div>
+        </div> */}
       </header>
 
       <div className='relative isolate flex flex-auto overflow-hidden bg-white dark:bg-gray-900'>
