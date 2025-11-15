@@ -1,4 +1,4 @@
-import { useEventsStore } from '@/store/store';
+import { useEventsStore } from '@/stores/zuStore';
 import type { Event } from '@/types';
 import type { Dispatch, SetStateAction } from 'react';
 

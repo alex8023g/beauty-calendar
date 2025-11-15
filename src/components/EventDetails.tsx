@@ -1,13 +1,13 @@
 import { Button } from './ui/button';
 import { SelectEventType } from './SelectEventType';
-import { type Dispatch, type SetStateAction } from 'react';
+import { useState, type Dispatch, type SetStateAction } from 'react';
 import { Preferences } from '@capacitor/preferences';
-import { useEventsStore } from '@/store/store';
+import { useEventsStore } from '@/stores/zuStore';
 import type { Event } from '@/types';
 import { nanoid } from 'nanoid';
 import { scheduleBasicNotification } from '@/lib/localNotifications';
 import type { Day } from '@/lib/createYearCalendar';
-// import type { Day } from '@/lib/createYearCalendar';
+import { WheelTimePicker } from './WheelTimePicker';
 
 export function EventDetails({
   day,
@@ -24,18 +24,31 @@ export function EventDetails({
 }) {
   const selectedEvent = useEventsStore((state) => state.selectedEvent);
   const setEvents = useEventsStore((state) => state.setEvents);
+  const [isTimePickerOpen, setIsTimePickerOpen] = useState(false);
+
   return (
     <div className='/border flex h-full flex-col justify-between pb-10'>
       <div className='/mt-6 /border-t border-gray-100 dark:border-white/10'>
         <dl className='divide-y divide-gray-100 dark:divide-white/10'>
-          <div className='grid grid-cols-2 gap-4 px-0 py-4'>
-            <dt className='text-sm/6 font-medium text-gray-900 dark:text-gray-100'>
-              Время
-            </dt>
-            <dd className='/col-span-2 mt-0 text-right text-sm/6 text-gray-700 dark:text-gray-400'>
-              {selectedEvent.time.hour}:
-              {String(selectedEvent.time?.minute).padStart(2, '0')}
-            </dd>
+          <div
+            className='relative'
+            onClick={() => setIsTimePickerOpen((st) => !st)}
+          >
+            <div className='grid grid-cols-2 gap-4 px-0 py-4'>
+              <dt className='text-sm/6 font-medium text-gray-900 dark:text-gray-100'>
+                Время
+              </dt>
+              <dd className='/col-span-2 mt-0 text-right text-sm/6 text-gray-700 dark:text-gray-400'>
+                {selectedEvent.time.hour}:
+                {String(selectedEvent.time?.minute).padStart(2, '0')}
+              </dd>
+            </div>
+            {isTimePickerOpen && (
+              <div className='absolute top-12 -right-2'>
+                <WheelTimePicker />
+                <Button className='mt-2 w-full shadow-xl'>Закрыть</Button>
+              </div>
+            )}
           </div>
           <div className='grid grid-cols-2 gap-4 px-0 py-4'>
             <dt className='text-sm/6 font-medium text-gray-900 dark:text-gray-100'>
@@ -71,6 +84,7 @@ export function EventDetails({
           </div>
         </dl>
       </div>
+
       <div className='mt-4 flex gap-2'>
         <Button
           variant='outline'

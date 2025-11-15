@@ -1,5 +1,5 @@
 import { useEffect, useRef, type Dispatch, type SetStateAction } from 'react';
-import { useEventsStore } from '@/store/store';
+import { useEventsStore } from '@/stores/zuStore';
 
 export function Hour({
   hour,

@@ -8,7 +8,7 @@ import {
 import { DaySchedule } from '@/components/DaySchedule';
 import type { Day } from '@/lib/createYearCalendar';
 import dayjs from 'dayjs';
-import { useEventsStore } from '@/store/store';
+import { useEventsStore } from '@/stores/zuStore';
 import { useEffect, useRef } from 'react';
 
 const todayDateString = dayjs().format('YYYY-MM-DD');

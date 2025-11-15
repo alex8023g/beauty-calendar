@@ -1,5 +1,5 @@
 import { ChevronDownIcon } from '@heroicons/react/16/solid';
-import { useEventsStore } from '@/store/store';
+import { useEventsStore } from '@/stores/zuStore';
 
 export function SelectEventType() {
   const selectedEvent = useEventsStore((state) => state.selectedEvent);

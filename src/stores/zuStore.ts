@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-// import { devtools } from 'zustand/middleware';
+import { devtools } from 'zustand/middleware';
 import type { Event } from '@/types';
 import { defaultEvent } from '@/constants/defaultEvent';
 
@@ -17,8 +17,7 @@ interface EventsState {
 }
 
 export const useEventsStore = create<EventsState>()(
-  // devtools(
-  (set) => ({
+  devtools((set) => ({
     events: [],
     setEvents: (events) => set(() => ({ events: events })),
     addEvent: (event) =>
@@ -35,6 +34,5 @@ export const useEventsStore = create<EventsState>()(
     notificationNum: 0,
     notificationNumInc: () =>
       set((state) => ({ notificationNum: state.notificationNum + 1 })),
-  }),
-  // ),
+  })),
 );

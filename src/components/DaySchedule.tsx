@@ -4,7 +4,7 @@ import { EventDetails } from './EventDetails';
 import { EventItem } from './EventItem';
 import type { Day } from '@/lib/createYearCalendar';
 import dayjs from 'dayjs';
-import { useEventsStore } from '@/store/store';
+import { useEventsStore } from '@/stores/zuStore';
 import { Transition } from '@headlessui/react';
 import 'dayjs/locale/ru.js'; // Importing Russian locale for dayjs
 dayjs.locale('ru');
