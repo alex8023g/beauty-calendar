@@ -1,3 +1,4 @@
+import type { Day } from '@/lib/createYearCalendar';
 import type { Event } from '../types';
 
 export const defaultEvent: Event = {
@@ -18,3 +19,11 @@ export const eventTypes = [
   'Массаж',
   'Депиляция',
 ];
+
+export const defaultDay: Day = {
+  dateString: '',
+  dayOfYear: null,
+  isHoliday: false,
+  isWeekend: false,
+  isSelected: false,
+};
