@@ -1,13 +1,12 @@
 import { useEventsStore } from '@/stores/zuStore';
 import type { Event } from '@/types';
-import type { Dispatch, SetStateAction } from 'react';
 
 export function EventItem({
   event,
   setIsDetailsOpen,
 }: {
   event: Event;
-  setIsDetailsOpen: Dispatch<SetStateAction<boolean>>;
+  setIsDetailsOpen: (isOpen: boolean) => void;
 }) {
   const setSelectedEvent = useEventsStore((state) => state.setSelectedEvent);
   return (

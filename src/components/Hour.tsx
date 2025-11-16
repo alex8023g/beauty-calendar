@@ -1,4 +1,4 @@
-import { useEffect, useRef, type Dispatch, type SetStateAction } from 'react';
+import { useEffect, useRef } from 'react';
 import { useEventsStore } from '@/stores/zuStore';
 
 export function Hour({
@@ -9,7 +9,7 @@ export function Hour({
 }: {
   hour: number;
   // day: Day;
-  setIsDetailsOpen: Dispatch<SetStateAction<boolean>>;
+  setIsDetailsOpen: (isOpen: boolean) => void;
   // setEvent: Dispatch<SetStateAction<Event>>;
 }) {
   const selectedEvent = useEventsStore((state) => state.selectedEvent);

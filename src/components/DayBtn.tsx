@@ -8,17 +8,17 @@
 // import { DaySchedule } from '@/components/DaySchedule';
 import type { Day } from '@/lib/createYearCalendar';
 import dayjs from 'dayjs';
-import { useEventsStore } from '@/stores/zuStore';
+import { useEventsStore, useStatesStore } from '@/stores/zuStore';
 import { useEffect, useRef } from 'react';
 
 const todayDateString = dayjs().format('YYYY-MM-DD');
 
 export function DayBtn({ day }: { day: Day }) {
   const events = useEventsStore((state) => state.events);
-  const setIsDayScheduleOpen = useEventsStore(
+  const setIsDayScheduleOpen = useStatesStore(
     (state) => state.setIsDayScheduleOpen,
   );
-  const setSelectedDay = useEventsStore((state) => state.setSelectedDay);
+  const setSelectedDay = useStatesStore((state) => state.setSelectedDay);
   const el = useRef<HTMLButtonElement | null>(null);
   useEffect(() => {
     if (todayDateString === day.dateString) {

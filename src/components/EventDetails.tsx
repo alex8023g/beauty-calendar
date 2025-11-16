@@ -1,6 +1,6 @@
 import { Button } from './ui/button';
 import { SelectEventType } from './SelectEventType';
-import { useState, type Dispatch, type SetStateAction } from 'react';
+import { useState } from 'react';
 import { useEventsStore } from '@/stores/zuStore';
 import type { Event } from '@/types';
 import { nanoid } from 'nanoid';
@@ -23,7 +23,7 @@ export function EventDetails({
   // event: Event;
   // setEvent: Dispatch<SetStateAction<Event>>;
   events: Event[];
-  setIsDetailsOpen: Dispatch<SetStateAction<boolean>>;
+  setIsDetailsOpen: (isOpen: boolean) => void;
 }) {
   const selectedEvent = useEventsStore((state) => state.selectedEvent);
   const setEvents = useEventsStore((state) => state.setEvents);

@@ -15,34 +15,61 @@ interface EventsState {
   setDefaultEvent: () => void;
   notificationNum: number;
   notificationNumInc: () => void;
+  // isDayScheduleOpen: boolean;
+  // setIsDayScheduleOpen: (isOpen: boolean) => void;
+  // selectedDay: Day;
+  // setSelectedDay: (day: Day) => void;
+}
+
+export const useEventsStore = create<EventsState>()(
+  devtools(
+    ////
+    (set) => ({
+      events: [],
+      setEvents: (events) => set(() => ({ events: events })),
+      addEvent: (event) =>
+        set((state) => ({
+          events: [...state.events, event],
+        })),
+      deleteEvent: (id) =>
+        set((state) => ({
+          events: state.events.filter((event) => event.id !== id),
+        })),
+      selectedEvent: defaultEvent,
+      setSelectedEvent: (event) => set(() => ({ selectedEvent: event })),
+      setDefaultEvent: () => set(() => ({ selectedEvent: defaultEvent })),
+      notificationNum: 0,
+      notificationNumInc: () =>
+        set((state) => ({ notificationNum: state.notificationNum + 1 })),
+      // isDayScheduleOpen: false,
+      // setIsDayScheduleOpen: (isOpen) =>
+      //   set(() => ({ isDayScheduleOpen: isOpen })),
+      // selectedDay: defaultDay,
+      // setSelectedDay: (day) => set(() => ({ selectedDay: day })),
+    }),
+  ),
+);
+
+interface StatesState {
   isDayScheduleOpen: boolean;
   setIsDayScheduleOpen: (isOpen: boolean) => void;
   selectedDay: Day;
   setSelectedDay: (day: Day) => void;
+  isDetailsOpen: boolean;
+  setIsDetailsOpen: (isOpen: boolean) => void;
 }
 
-export const useEventsStore = create<EventsState>()(
-  devtools((set) => ({
-    events: [],
-    setEvents: (events) => set(() => ({ events: events })),
-    addEvent: (event) =>
-      set((state) => ({
-        events: [...state.events, event],
-      })),
-    deleteEvent: (id) =>
-      set((state) => ({
-        events: state.events.filter((event) => event.id !== id),
-      })),
-    selectedEvent: defaultEvent,
-    setSelectedEvent: (event) => set(() => ({ selectedEvent: event })),
-    setDefaultEvent: () => set(() => ({ selectedEvent: defaultEvent })),
-    notificationNum: 0,
-    notificationNumInc: () =>
-      set((state) => ({ notificationNum: state.notificationNum + 1 })),
-    isDayScheduleOpen: false,
-    setIsDayScheduleOpen: (isOpen) =>
-      set(() => ({ isDayScheduleOpen: isOpen })),
-    selectedDay: defaultDay,
-    setSelectedDay: (day) => set(() => ({ selectedDay: day })),
-  })),
+export const useStatesStore = create<StatesState>()(
+  devtools(
+    ////
+    (set) => ({
+      isDayScheduleOpen: false,
+      setIsDayScheduleOpen: (isOpen) =>
+        set(() => ({ isDayScheduleOpen: isOpen })),
+      selectedDay: defaultDay,
+      setSelectedDay: (day) => set(() => ({ selectedDay: day })),
+      isDetailsOpen: false,
+      setIsDetailsOpen: (isOpen) => set(() => ({ isDetailsOpen: isOpen })),
+    }),
+  ),
 );

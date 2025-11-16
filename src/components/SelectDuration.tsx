@@ -32,7 +32,8 @@ export function SelectDuration() {
         >
           {durations.map((duration) => (
             <option key={duration.value} value={duration.value}>
-              <div className='text-right'>{duration.label}</div>
+              {/* <div className='text-right'>{duration.label}</div> */}
+              {duration.label}
             </option>
           ))}
         </select>

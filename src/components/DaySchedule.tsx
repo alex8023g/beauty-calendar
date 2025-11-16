@@ -1,20 +1,20 @@
 import { Hour } from './Hour';
-import { useState } from 'react';
 import { EventDetails } from './EventDetails';
 import { EventItem } from './EventItem';
 import type { Day } from '@/lib/createYearCalendar';
 import dayjs from 'dayjs';
-import { useEventsStore } from '@/stores/zuStore';
+import { useEventsStore, useStatesStore } from '@/stores/zuStore';
 import { Transition } from '@headlessui/react';
 import 'dayjs/locale/ru.js'; // Importing Russian locale for dayjs
 dayjs.locale('ru');
 export type Time = { hour: number; minute: number };
 
 export function DaySchedule({ day }: { day: Day }) {
-  const [isDetailsOpen, setIsDetailsOpen] = useState(false);
+  // const [isDetailsOpen, setIsDetailsOpen] = useState(false);
   const events = useEventsStore((state) => state.events);
   const setDefaultEvent = useEventsStore((state) => state.setDefaultEvent);
-
+  const isDetailsOpen = useStatesStore((state) => state.isDetailsOpen);
+  const setIsDetailsOpen = useStatesStore((state) => state.setIsDetailsOpen);
   const todayEvents = events.filter(
     (event) => event.dateString === day.dateString,
   );
@@ -35,19 +35,29 @@ export function DaySchedule({ day }: { day: Day }) {
       </header> */}
 
       <div className='relative isolate flex flex-auto overflow-hidden bg-white dark:bg-gray-900'>
-        {todayEvents.length > 0 && !isDetailsOpen && (
-          <div className='absolute top-0 right-0 z-30 m-2 w-[360px] rounded-md bg-blue-300 pl-3 text-sm/6'>
+        {/* {todayEvents.length > 0 && !isDetailsOpen && (
+          <div className='/right-0 absolute top-0 left-0 z-50 m-2 w-[360px] rounded-md bg-blue-300 pl-3 text-sm/6'>
             {todayEvents.map((event) => (
-              <div className=''>
+              <div key={event.id} className=''>
                 <span>{String(event.time?.hour).padStart(2, '0')}:</span>
                 <span>{String(event.time?.minute).padStart(2, '0')} </span>
                 <span>{event.type}</span>
               </div>
             ))}
           </div>
-        )}
+        )} */}
         <div className='flex flex-auto flex-col overflow-auto'>
-          {/* {!isDetailsOpen && ( */}
+          {todayEvents.length > 0 && (
+            <div className='sticky top-0 z-30 m-2 w-[360px] rounded-md bg-blue-300 pl-3 text-sm/6'>
+              {todayEvents.map((event) => (
+                <div key={event.id} className=''>
+                  <span>{String(event.time?.hour).padStart(2, '0')}:</span>
+                  <span>{String(event.time?.minute).padStart(2, '0')} </span>
+                  <span>{event.type}</span>
+                </div>
+              ))}
+            </div>
+          )}
           <div className='flex w-full flex-auto'>
             <div className='w-14 flex-none bg-white ring-1 ring-gray-100 dark:bg-gray-900 dark:ring-white/5' />
             <div className='grid flex-auto grid-cols-1 grid-rows-1'>

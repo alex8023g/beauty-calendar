@@ -5,10 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "npx vite --host",
+    "mobile:ios": "npm run build && npx cap copy && npx cap sync && npx cap open ios",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview",
-    "mobile:ios": "npm run build && npx cap copy && npx cap sync && npx cap open ios"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@capacitor/app": "7.1.0",

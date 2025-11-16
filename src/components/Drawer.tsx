@@ -7,15 +7,21 @@ import {
 import { XMarkIcon } from '@heroicons/react/24/outline';
 import dayjs from 'dayjs';
 import { DaySchedule } from './DaySchedule';
-import { useEventsStore } from '@/stores/zuStore';
+import { useStatesStore } from '@/stores/zuStore';
 
 export default function Drawer() {
-  const isDayScheduleOpen = useEventsStore((state) => state.isDayScheduleOpen);
-  const setIsDayScheduleOpen = useEventsStore(
+  const isDayScheduleOpen = useStatesStore((state) => state.isDayScheduleOpen);
+  const setIsDayScheduleOpen = useStatesStore(
     (state) => state.setIsDayScheduleOpen,
   );
-  const selectedDay = useEventsStore((state) => state.selectedDay);
+  const selectedDay = useStatesStore((state) => state.selectedDay);
+  const setIsDetailsOpen = useStatesStore((state) => state.setIsDetailsOpen);
+  // const events = useEventsStore((state) => state.events);
+  // const isDetailsOpen = useStatesStore((state) => state.isDetailsOpen);
 
+  // const todayEvents = events.filter(
+  //   (event) => event.dateString === selectedDay.dateString,
+  // );
   return (
     <div>
       {/* <button
@@ -36,7 +42,7 @@ export default function Drawer() {
 
         <div className='fixed inset-0 overflow-hidden'>
           <div className='absolute inset-0 overflow-hidden'>
-            <div className='/pl-10 pointer-events-none fixed inset-y-0 right-0 flex max-w-full border border-green-500 pt-10 sm:pl-16'>
+            <div className='/pl-10 pointer-events-none fixed inset-y-0 right-0 flex max-w-full pt-10 sm:pl-16'>
               <DialogPanel
                 transition
                 className='pointer-events-auto w-screen max-w-md transform overflow-y-hidden transition duration-500 ease-in-out data-closed:translate-y-full sm:duration-700'
@@ -64,7 +70,10 @@ export default function Drawer() {
                       <div className='ml-3 flex h-7 items-center'>
                         <button
                           type='button'
-                          onClick={() => setIsDayScheduleOpen(false)}
+                          onClick={() => {
+                            setIsDayScheduleOpen(false);
+                            setIsDetailsOpen(false);
+                          }}
                           className='relative rounded-md text-gray-400 hover:text-gray-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 dark:hover:text-white dark:focus-visible:outline-indigo-500'
                         >
                           <span className='absolute -inset-2.5' />
@@ -73,6 +82,21 @@ export default function Drawer() {
                         </button>
                       </div>
                     </div>
+                    {/* {todayEvents.length > 0 && !isDetailsOpen && (
+                      <div className='/absolute /top-0 /right-0 /w-[360px] z-30 mt-2 rounded-md bg-blue-300 pl-3 text-sm/6'>
+                        {todayEvents.map((event) => (
+                          <div key={event.id} className=''>
+                            <span>
+                              {String(event.time?.hour).padStart(2, '0')}:
+                            </span>
+                            <span>
+                              {String(event.time?.minute).padStart(2, '0')}{' '}
+                            </span>
+                            <span>{event.type}</span>
+                          </div>
+                        ))}
+                      </div>
+                    )} */}
                   </div>
                   <div className='/px-4 relative mt-6 flex-1 overflow-y-scroll sm:px-6'>
                     <DaySchedule day={selectedDay} />
