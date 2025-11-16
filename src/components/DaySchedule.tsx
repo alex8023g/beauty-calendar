@@ -21,7 +21,7 @@ export function DaySchedule({ day }: { day: Day }) {
 
   return (
     <div className='flex h-full flex-col'>
-      <header className='flex flex-none items-center justify-between border-b border-gray-200 px-6 py-4 dark:border-white/10 dark:bg-gray-800/50 dark:max-md:border-white/15'>
+      {/* <header className='flex flex-none items-center justify-between border-b border-gray-200 px-6 py-4 dark:border-white/10 dark:bg-gray-800/50 dark:max-md:border-white/15'>
         <div>
           <h1 className='text-base font-semibold text-gray-900 dark:text-white'>
             <time dateTime={day.dateString} className=''>
@@ -32,32 +32,7 @@ export function DaySchedule({ day }: { day: Day }) {
             {dayjs(day.dateString).format('dddd')}
           </p>
         </div>
-        {/* <div className='flex items-center'>
-          <div className='relative flex items-center rounded-md bg-white shadow-xs outline -outline-offset-1 outline-gray-300 md:items-stretch dark:bg-white/10 dark:shadow-none dark:outline-white/5'>
-            <button
-              type='button'
-              className='flex h-9 w-12 items-center justify-center rounded-l-md pr-1 text-gray-400 hover:text-gray-500 focus:relative md:w-9 md:pr-0 md:hover:bg-gray-50 dark:hover:text-white dark:md:hover:bg-white/10'
-            >
-              <span className='sr-only'>Previous day</span>
-              <ChevronLeftIcon aria-hidden='true' className='size-5' />
-            </button>
-            <button
-              type='button'
-              className='hidden px-3.5 text-sm font-semibold text-gray-900 hover:bg-gray-50 focus:relative md:block dark:text-white dark:hover:bg-white/10'
-            >
-              Today
-            </button>
-            <span className='relative -mx-px h-5 w-px bg-gray-300 md:hidden dark:bg-white/10' />
-            <button
-              type='button'
-              className='flex h-9 w-12 items-center justify-center rounded-r-md pl-1 text-gray-400 hover:text-gray-500 focus:relative md:w-9 md:pl-0 md:hover:bg-gray-50 dark:hover:text-white dark:md:hover:bg-white/10'
-            >
-              <span className='sr-only'>Next day</span>
-              <ChevronRightIcon aria-hidden='true' className='size-5' />
-            </button>
-          </div>
-        </div> */}
-      </header>
+      </header> */}
 
       <div className='relative isolate flex flex-auto overflow-hidden bg-white dark:bg-gray-900'>
         {todayEvents.length > 0 && !isDetailsOpen && (
