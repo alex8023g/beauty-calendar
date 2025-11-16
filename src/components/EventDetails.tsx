@@ -1,13 +1,16 @@
 import { Button } from './ui/button';
 import { SelectEventType } from './SelectEventType';
 import { useState, type Dispatch, type SetStateAction } from 'react';
-import { Preferences } from '@capacitor/preferences';
 import { useEventsStore } from '@/stores/zuStore';
 import type { Event } from '@/types';
 import { nanoid } from 'nanoid';
 import { scheduleBasicNotification } from '@/lib/localNotifications';
 import type { Day } from '@/lib/createYearCalendar';
 import { WheelTimePicker } from './WheelTimePicker';
+import { saveEventsToLocalStorage } from '@/stores/localStore';
+import { SelectDuration } from './SelectDuration';
+import SelectRemindBeforeOne from './SelectRemindBeforeOne';
+import SelectRemindBeforeTwo from './SelectRemindBeforeTwo';
 
 export function EventDetails({
   day,
@@ -27,8 +30,8 @@ export function EventDetails({
   const [isTimePickerOpen, setIsTimePickerOpen] = useState(false);
 
   return (
-    <div className='/border flex h-full flex-col justify-between pb-10'>
-      <div className='/mt-6 /border-t border-gray-100 dark:border-white/10'>
+    <div className='flex h-full flex-col justify-between pb-10'>
+      <div className='border-gray-100 dark:border-white/10'>
         <dl className='divide-y divide-gray-100 dark:divide-white/10'>
           <div
             className='relative'
@@ -50,7 +53,7 @@ export function EventDetails({
               </div>
             )}
           </div>
-          <div className='grid grid-cols-2 gap-4 px-0 py-4'>
+          <div className='grid grid-cols-2 gap-1 px-0 py-4'>
             <dt className='text-sm/6 font-medium text-gray-900 dark:text-gray-100'>
               Событие
             </dt>
@@ -63,23 +66,23 @@ export function EventDetails({
               Продолжительность
             </dt>
             <dd className='/col-span-2 mt-0 text-right text-sm/6 text-gray-700 dark:text-gray-400'>
-              1 час
+              <SelectDuration />
             </dd>
           </div>
           <div className='grid grid-cols-2 gap-4 px-0 py-4'>
             <dt className='text-sm/6 font-medium text-gray-900 dark:text-gray-100'>
-              Напомнить
+              Напоминание 1
             </dt>
             <dd className='/col-span-2 mt-0 text-right text-sm/6 text-gray-700 dark:text-gray-400'>
-              за 2 часа
+              <SelectRemindBeforeOne />
             </dd>
           </div>
           <div className='grid grid-cols-2 gap-4 px-0 py-4'>
             <dt className='text-sm/6 font-medium text-gray-900 dark:text-gray-100'>
-              Напомнить
+              Напоминание 2
             </dt>
             <dd className='/col-span-2 mt-0 text-right text-sm/6 text-gray-700 dark:text-gray-400'>
-              за 1 день
+              <SelectRemindBeforeTwo />
             </dd>
           </div>
         </dl>
@@ -104,10 +107,11 @@ export function EventDetails({
               const updEvents: Event[] = events.filter(
                 (event) => event.id !== selectedEvent.id,
               );
-              Preferences.set({
-                key: 'events',
-                value: JSON.stringify(updEvents),
-              });
+              // Preferences.set({
+              //   key: 'events',
+              //   value: JSON.stringify(updEvents),
+              // });
+              saveEventsToLocalStorage(updEvents);
               // deleteEvent(selectedEvent.id);
               setEvents(updEvents);
               scheduleBasicNotification({
@@ -131,10 +135,11 @@ export function EventDetails({
                   dateString: day.dateString,
                 },
               ];
-              Preferences.set({
-                key: 'events',
-                value: JSON.stringify(updEvents),
-              });
+              // Preferences.set({
+              //   key: 'events',
+              //   value: JSON.stringify(updEvents),
+              // });
+              saveEventsToLocalStorage(updEvents);
               // addEvent(newEvent);
               setEvents(updEvents);
               scheduleBasicNotification({ events: updEvents });

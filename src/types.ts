@@ -4,6 +4,6 @@ export type Event = {
   time: { hour: number; minute: number };
   type: string;
   duration: number;
-  remainderOne: number;
-  remainderTwo: number;
+  reminderOne: number;
+  reminderTwo: number;
 };

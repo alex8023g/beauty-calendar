@@ -35,10 +35,24 @@ export async function scheduleBasicNotification({
     )
     .map((event, i) => {
       const eventDate = new Date(event.dateString);
-      eventDate.setHours(event.time.hour - 2, event.time.minute, 0);
+      if (event.reminderOne % 1 === 0) {
+        // whole hours
+        eventDate.setHours(
+          event.time.hour - event.reminderOne,
+          event.time.minute,
+          0,
+        );
+      } else {
+        // half hours
+        eventDate.setHours(
+          event.time.hour - Math.trunc(event.reminderOne),
+          event.time.minute - 30,
+          0,
+        );
+      }
       return {
-        title: `Напоминаем`,
-        body: `Вы записаны на ${event.type} ${event.dateString} в ${event.time.hour}:${String(event.time?.minute).padStart(2, '0')}`,
+        title: `Напоминание бьюти-календаря`,
+        body: `Вы записаны: ${event.type} ${dayjs(event.dateString).format('DD.MM.YYYY')} в ${event.time.hour}:${String(event.time?.minute).padStart(2, '0')}`,
         id: i + 1, // Unique identifier for the notification
         schedule: {
           at: eventDate,

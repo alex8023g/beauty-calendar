@@ -29,7 +29,7 @@ export function WheelTimePicker() {
   const setSelectedEvent = useEventsStore((state) => state.setSelectedEvent);
   return (
     <div className='w-56 bg-white'>
-      <WheelPickerWrapper className='shadow-lg'>
+      <WheelPickerWrapper className='text-base shadow-lg'>
         <WheelPicker
           options={hourOptions}
           defaultValue={selectedEvent.time.hour}

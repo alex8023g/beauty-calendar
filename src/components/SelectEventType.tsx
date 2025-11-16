@@ -1,4 +1,5 @@
-import { ChevronDownIcon } from '@heroicons/react/16/solid';
+// import { ChevronDownIcon } from '@heroicons/react/16/solid';
+import { eventTypes } from '@/constants/eventConstants';
 import { useEventsStore } from '@/stores/zuStore';
 
 export function SelectEventType() {
@@ -14,23 +15,26 @@ export function SelectEventType() {
           value={selectedEvent.type}
           disabled={Boolean(selectedEvent.id)}
           dir='rtl'
-          className='/py-1.5 /outline-1 /-outline-offset-1 /outline-gray-300 /focus-visible:outline-indigo-600 /dark:focus-visible:outline-indigo-500 col-start-1 row-start-1 w-full appearance-none justify-self-end rounded-md bg-white pr-1 pl-3 text-sm/6 text-gray-700 focus-visible:outline-0 focus-visible:-outline-offset-2 sm:text-sm/6 dark:bg-white/5 dark:text-white dark:outline-white/10 dark:*:bg-gray-800'
+          className='col-start-1 row-start-1 w-full appearance-none justify-self-end rounded-md bg-white pr-1 pl-3 text-base text-gray-700 focus-visible:outline-0 focus-visible:-outline-offset-2 sm:text-sm/6'
           onChange={(e) =>
             setSelectedEvent({ ...selectedEvent, type: e.target.value })
           }
         >
-          <option>Маникюр</option>
+          {eventTypes.map((type) => (
+            <option key={type}>{type}</option>
+          ))}
+          {/* <option>Маникюр</option>
           <option>Педикюр</option>
           <option>Брови</option>
           <option>Ресницы</option>
-          <option>Массаж</option>
+          <option>Массаж</option> */}
         </select>
-        {!selectedEvent.id && (
+        {/* {!selectedEvent.id && (
           <ChevronDownIcon
             aria-hidden='true'
             className='pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4 dark:text-gray-400'
           />
-        )}
+        )} */}
       </div>
     </>
   );
