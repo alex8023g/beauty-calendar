@@ -8,7 +8,7 @@ export function RootLayout() {
         Бьюти календарь
       </header> */}
       <Outlet />
-      <footer className='fixed right-0 bottom-0 left-0 z-20 border border-blue-500 bg-white p-2'>
+      <footer className='fixed right-0 bottom-0 left-0 z-20 p-2 backdrop-blur-lg'>
         <ViewToggle />
       </footer>
     </div>

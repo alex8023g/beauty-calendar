@@ -25,7 +25,7 @@ export function EventsListItem({ event }: { event: Event }) {
             dateTime={event.dateString}
             className='shrink-0 text-sm whitespace-nowrap text-gray-500'
           >
-            {event.time.hour}: {String(event.time?.minute).padStart(2, '0')}
+            {event.time.hour}:{String(event.time?.minute).padStart(2, '0')}
           </time>
           <div className='text-sm text-gray-500'>
             {' '}
@@ -33,11 +33,6 @@ export function EventsListItem({ event }: { event: Event }) {
           </div>
         </div>
       </div>
-      {/* <div className='mt-1'>
-        <p className='line-clamp-2 text-sm text-gray-600'>
-          {dayjs(event.dateString).format('DD MMMM ')}
-        </p>
-      </div> */}
     </li>
   );
 }
