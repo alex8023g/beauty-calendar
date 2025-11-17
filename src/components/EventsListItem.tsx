@@ -1,11 +1,25 @@
+import { defaultDay } from '@/constants/eventConstants';
+import { useEventsStore, useStatesStore } from '@/stores/zuStore';
 import type { Event } from '@/types';
 import dayjs from 'dayjs';
 
 export function EventsListItem({ event }: { event: Event }) {
+  const setSelectedEvent = useEventsStore((state) => state.setSelectedEvent);
+  const setIsDetailsOpen = useStatesStore((state) => state.setIsDetailsOpen);
+  const setSelectedDay = useStatesStore((state) => state.setSelectedDay);
+  const setIsDayScheduleOpen = useStatesStore(
+    (state) => state.setIsDayScheduleOpen,
+  );
   return (
     <li
       key={event.id}
       className='relative bg-white px-4 py-5 focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-inset hover:bg-gray-50'
+      onClick={() => {
+        setSelectedEvent(event);
+        setIsDayScheduleOpen(true);
+        setIsDetailsOpen(true);
+        setSelectedDay({ ...defaultDay, dateString: event.dateString });
+      }}
     >
       <div className='flex justify-between space-x-3'>
         <div className='min-w-0 flex-1'>

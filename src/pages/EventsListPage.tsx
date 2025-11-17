@@ -1,9 +1,12 @@
+import { DaySchedule2 } from '@/components/DaySchedule2';
+import Drawer from '@/components/Drawer';
 import { EventsListItem } from '@/components/EventsListItem';
-import { useEventsStore } from '@/stores/zuStore';
+import { useEventsStore, useStatesStore } from '@/stores/zuStore';
 import dayjs from 'dayjs';
 
 export function EventsListPage() {
   const events = useEventsStore((state) => state.events);
+  const selectedDay = useStatesStore((state) => state.selectedDay);
   return (
     <div>
       <ul role='list' className='divide-y divide-gray-100'>
@@ -22,6 +25,9 @@ export function EventsListPage() {
             <EventsListItem key={event.id} event={event} />
           ))}
       </ul>
+      <Drawer>
+        <DaySchedule2 day={selectedDay} />
+      </Drawer>
     </div>
   );
 }
