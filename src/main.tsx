@@ -7,6 +7,8 @@ import { useEventsStore } from './stores/zuStore.ts';
 import { requestNotificationPermissions } from './lib/localNotifications.ts';
 import { LocalNotifications } from '@capacitor/local-notifications';
 import { getEventsFromLocalStorage } from './stores/localStore.ts';
+import { EventsListPage } from './pages/EventsListPage.tsx';
+import { RootLayout } from './components/RootLayout.tsx';
 
 requestNotificationPermissions();
 const events = await getEventsFromLocalStorage();
@@ -19,7 +21,10 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<HomePage />} />
+        <Route element={<RootLayout />}>
+          <Route path='/' element={<HomePage />} />
+          <Route path='/list' element={<EventsListPage />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   </StrictMode>,
