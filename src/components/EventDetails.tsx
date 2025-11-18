@@ -131,6 +131,7 @@ export function EventDetails({
               if (variant === 'forEventsList') {
                 setIsDayScheduleOpen(false);
               }
+              setDefaultEvent();
             }}
           >
             Удалить

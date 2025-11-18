@@ -12,19 +12,19 @@ export function ViewToggle() {
   }
   return (
     <div
-      className='group /w-11 /bg-gray-200 relativ inline-flex w-17 shrink-0 rounded-full p-1 inset-ring inset-ring-gray-900/5 outline-offset-2 outline-indigo-600'
+      className='relativ inline-flex w-17 shrink-0 rounded-full p-1 inset-ring inset-ring-gray-900/5 outline-offset-2 outline-indigo-600'
       onClick={handleClick}
     >
       <span
         className={twJoin(
-          'relative size-7 rounded-full bg-white shadow-xs ring-1 ring-gray-900/5 transition-transform duration-200 ease-in-out',
+          '/bg-white relative size-7 rounded-full shadow-xs ring-1 ring-gray-900/5 transition-transform duration-200 ease-in-out',
           path === '/' ? 'translate-x-0' : 'translate-x-8',
         )}
       >
         <span
           aria-hidden='true'
           className={twJoin(
-            '/group-has-checked:opacity-0 /group-has-checked:duration-100 /group-has-checked:ease-out /opacity-100 absolute inset-0 flex size-full items-center justify-center transition-opacity duration-200 ease-in',
+            'absolute inset-0 flex size-full items-center justify-center transition-opacity duration-200 ease-in',
             path === '/' ? 'opacity-100' : 'opacity-0 duration-100 ease-out',
           )}
         >
