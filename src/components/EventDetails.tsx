@@ -1,7 +1,7 @@
 import { Button } from './ui/button';
 import { SelectEventType } from './SelectEventType';
 import { useState } from 'react';
-import { useEventsStore } from '@/stores/zuStore';
+import { useEventsStore, useStatesStore } from '@/stores/zuStore';
 import type { Event } from '@/types';
 import { nanoid } from 'nanoid';
 import { scheduleBasicNotification } from '@/lib/localNotifications';
@@ -18,17 +18,22 @@ export function EventDetails({
   // setEvent,
   events,
   setIsDetailsOpen,
+  variant,
 }: {
   day: Day;
   // event: Event;
   // setEvent: Dispatch<SetStateAction<Event>>;
   events: Event[];
   setIsDetailsOpen: (isOpen: boolean) => void;
+  variant: 'forEventsList' | 'forDaySchedule';
 }) {
   const selectedEvent = useEventsStore((state) => state.selectedEvent);
   const setEvents = useEventsStore((state) => state.setEvents);
   const [isTimePickerOpen, setIsTimePickerOpen] = useState(false);
-
+  const setIsDayScheduleOpen = useStatesStore(
+    (state) => state.setIsDayScheduleOpen,
+  );
+  const setDefaultEvent = useEventsStore((state) => state.setDefaultEvent);
   return (
     <div className='flex h-full flex-col justify-between pb-10'>
       <div className='border-gray-100 dark:border-white/10'>
@@ -46,7 +51,7 @@ export function EventDetails({
                 {String(selectedEvent.time?.minute).padStart(2, '0')}
               </dd>
             </div>
-            {isTimePickerOpen && (
+            {isTimePickerOpen && !selectedEvent.id && (
               <div className='absolute top-12 -right-2'>
                 <WheelTimePicker />
                 <Button className='mt-2 w-full shadow-xl'>Закрыть</Button>
@@ -93,8 +98,13 @@ export function EventDetails({
           variant='outline'
           className='grow'
           onClick={() => {
-            setIsDetailsOpen(false);
-            // setDefaultEvent();
+            if (variant === 'forDaySchedule') {
+              setIsDetailsOpen(false);
+            } else {
+              setIsDayScheduleOpen(false);
+              setIsDetailsOpen(false);
+            }
+            setDefaultEvent();
           }}
         >
           Закрыть
@@ -118,6 +128,10 @@ export function EventDetails({
                 events: updEvents,
               });
               setIsDetailsOpen(false);
+              if (variant === 'forEventsList') {
+                setIsDayScheduleOpen(false);
+              }
+              setDefaultEvent();
             }}
           >
             Удалить

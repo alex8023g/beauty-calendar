@@ -1,17 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "camera.macro.png",
+      "filename" : "calendarFlower.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "camera.macro 1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "camera.macro 2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

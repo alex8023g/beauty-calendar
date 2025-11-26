@@ -6,33 +6,25 @@ import {
 } from '@headlessui/react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 import dayjs from 'dayjs';
-import { DaySchedule } from './DaySchedule';
-import { useStatesStore } from '@/stores/zuStore';
+import { useEventsStore, useStatesStore } from '@/stores/zuStore';
 
-export default function Drawer() {
+export default function Drawer({ children }: { children: React.ReactNode }) {
   const isDayScheduleOpen = useStatesStore((state) => state.isDayScheduleOpen);
   const setIsDayScheduleOpen = useStatesStore(
     (state) => state.setIsDayScheduleOpen,
   );
   const selectedDay = useStatesStore((state) => state.selectedDay);
   const setIsDetailsOpen = useStatesStore((state) => state.setIsDetailsOpen);
-  // const events = useEventsStore((state) => state.events);
-  // const isDetailsOpen = useStatesStore((state) => state.isDetailsOpen);
+  const setDefaultEvent = useEventsStore((state) => state.setDefaultEvent);
 
-  // const todayEvents = events.filter(
-  //   (event) => event.dateString === selectedDay.dateString,
-  // );
   return (
     <div>
-      {/* <button
-        onClick={() => setOpen(true)}
-        className='rounded-md bg-gray-950/5 px-2.5 py-1.5 text-sm font-semibold text-gray-900 hover:bg-gray-950/10 dark:bg-white/10 dark:text-white dark:inset-ring dark:inset-ring-white/5 dark:hover:bg-white/20'
-      >
-        Open drawer
-      </button> */}
       <Dialog
         open={isDayScheduleOpen}
-        onClose={setIsDayScheduleOpen}
+        onClose={(e) => {
+          setIsDayScheduleOpen(e);
+          setDefaultEvent();
+        }}
         className='relative z-20'
       >
         <DialogBackdrop
@@ -82,24 +74,10 @@ export default function Drawer() {
                         </button>
                       </div>
                     </div>
-                    {/* {todayEvents.length > 0 && !isDetailsOpen && (
-                      <div className='/absolute /top-0 /right-0 /w-[360px] z-30 mt-2 rounded-md bg-blue-300 pl-3 text-sm/6'>
-                        {todayEvents.map((event) => (
-                          <div key={event.id} className=''>
-                            <span>
-                              {String(event.time?.hour).padStart(2, '0')}:
-                            </span>
-                            <span>
-                              {String(event.time?.minute).padStart(2, '0')}{' '}
-                            </span>
-                            <span>{event.type}</span>
-                          </div>
-                        ))}
-                      </div>
-                    )} */}
                   </div>
                   <div className='/px-4 relative mt-6 flex-1 overflow-y-scroll sm:px-6'>
-                    <DaySchedule day={selectedDay} />
+                    {/* <DaySchedule day={selectedDay} /> */}
+                    {children}
                   </div>
                 </div>
               </DialogPanel>

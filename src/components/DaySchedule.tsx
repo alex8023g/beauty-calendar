@@ -112,6 +112,7 @@ export function DaySchedule({ day }: { day: Day }) {
                 events={events}
                 // setEvents={setEvents}
                 setIsDetailsOpen={setIsDetailsOpen}
+                variant='forDaySchedule'
               />
             </div>
           </Transition>
