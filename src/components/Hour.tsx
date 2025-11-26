@@ -14,6 +14,7 @@ export function Hour({
 }) {
   const selectedEvent = useEventsStore((state) => state.selectedEvent);
   const setSelectedEvent = useEventsStore((state) => state.setSelectedEvent);
+  // const setIsEventEdit = useEventsStore((state) => state.setIsEventEdit);
   const el = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
     if (hour === 12) {
@@ -59,6 +60,7 @@ export function Hour({
             // id: nanoid(),
             time: { hour, minute: 30 },
           });
+          // setIsEventEdit(true);
           setIsDetailsOpen(true);
         }}
       />

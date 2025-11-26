@@ -109,9 +109,9 @@ export function DaySchedule({ day }: { day: Day }) {
                 day={day}
                 // event={event}
                 // setEvent={setEvent}
-                events={events}
+                // events={events}
                 // setEvents={setEvents}
-                setIsDetailsOpen={setIsDetailsOpen}
+                // setIsDetailsOpen={setIsDetailsOpen}
                 variant='forDaySchedule'
               />
             </div>

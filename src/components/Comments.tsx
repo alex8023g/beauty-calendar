@@ -7,7 +7,7 @@ import { Keyboard } from '@capacitor/keyboard';
 export default function Comments() {
   const selectedEvent = useEventsStore((state) => state.selectedEvent);
   const setSelectedEvent = useEventsStore((state) => state.setSelectedEvent);
-
+  // const isEventEdit = useEventsStore((state) => state.isEventEdit);
   return (
     <div className='flex items-start space-x-4'>
       <div className='group relative min-w-0 flex-1 transition-transform duration-300 has-focus:-translate-y-56'>
@@ -19,6 +19,7 @@ export default function Comments() {
             id='comment'
             name='comment'
             rows={5}
+            // disabled={!isEventEdit}
             placeholder='Добавьте комментарий...'
             className='block w-full resize-none bg-transparent px-3 py-1.5 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6 dark:text-white dark:placeholder:text-gray-500'
             defaultValue={selectedEvent.comments}

@@ -1,15 +1,10 @@
 import { EventDetails } from './EventDetails';
 import type { Day } from '@/lib/createYearCalendar';
 import dayjs from 'dayjs';
-import { useEventsStore, useStatesStore } from '@/stores/zuStore';
 import 'dayjs/locale/ru.js'; // Importing Russian locale for dayjs
 dayjs.locale('ru');
 
 export function DaySchedule2({ day }: { day: Day }) {
-  const events = useEventsStore((state) => state.events);
-
-  const setIsDetailsOpen = useStatesStore((state) => state.setIsDetailsOpen);
-
   return (
     <div className='flex h-full flex-col'>
       <div className='relative isolate flex flex-auto overflow-hidden bg-white dark:bg-gray-900'>
@@ -19,9 +14,9 @@ export function DaySchedule2({ day }: { day: Day }) {
               day={day}
               // event={event}
               // setEvent={setEvent}
-              events={events}
+              // events={events}
               // setEvents={setEvents}
-              setIsDetailsOpen={setIsDetailsOpen}
+              // setIsDetailsOpen={setIsDetailsOpen}
               variant='forEventsList'
             />
           </div>

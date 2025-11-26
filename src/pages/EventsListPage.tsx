@@ -1,4 +1,3 @@
-import Comments from '@/components/Comments';
 import { DaySchedule2 } from '@/components/DaySchedule2';
 import Drawer from '@/components/Drawer';
 import { EventsListItem } from '@/components/EventsListItem';
@@ -15,7 +14,7 @@ export function EventsListPage() {
   return (
     <div className='flex h-full flex-col'>
       {futureEvents.length > 0 ? (
-        <ul role='list' className='divide-y divide-gray-100'>
+        <ul role='list' className='divide-y divide-gray-100 pb-10'>
           {futureEvents
             .sort(
               (a, b) =>
@@ -37,9 +36,6 @@ export function EventsListPage() {
       <Drawer>
         <DaySchedule2 day={selectedDay} />
       </Drawer>
-      <div className='mt-auto'>
-        <Comments />
-      </div>
     </div>
   );
 }

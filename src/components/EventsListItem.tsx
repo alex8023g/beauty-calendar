@@ -10,6 +10,25 @@ export function EventsListItem({ event }: { event: Event }) {
   const setIsDayScheduleOpen = useStatesStore(
     (state) => state.setIsDayScheduleOpen,
   );
+
+  function getTitle() {
+    const commentsStart = event.comments.substring(0, 15);
+    const commentsLength = event.comments.length;
+    if (event.type !== 'Другое') {
+      return event.type;
+    } else {
+      if (commentsLength === 0) {
+        return 'Другое';
+      } else {
+        if (commentsLength > 15) {
+          return commentsStart + '...';
+        } else {
+          return commentsStart;
+        }
+      }
+    }
+  }
+
   return (
     <li
       key={event.id}
@@ -26,7 +45,7 @@ export function EventsListItem({ event }: { event: Event }) {
           <div className='block focus:outline-hidden'>
             <span aria-hidden='true' className='absolute inset-0' />
             <p className='truncate text-sm font-medium text-gray-900'>
-              {event.type}
+              {getTitle()}
             </p>
             <p className='truncate text-sm text-gray-500'>
               {' '}

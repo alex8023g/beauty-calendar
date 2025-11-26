@@ -11,6 +11,7 @@ const durations = [
 export function SelectDuration() {
   const selectedEvent = useEventsStore((state) => state.selectedEvent);
   const setSelectedEvent = useEventsStore((state) => state.setSelectedEvent);
+  // const isEventEdit = useEventsStore((state) => state.isEventEdit);
   return (
     <>
       {/* <div className=' grid grid-cols-1'> */}
@@ -19,7 +20,8 @@ export function SelectDuration() {
           id='EventDuration2'
           name='EventDuration2'
           value={selectedEvent.duration}
-          disabled={Boolean(selectedEvent.id)}
+          // disabled={Boolean(selectedEvent.id)}
+          // disabled={!isEventEdit}
           // dir='rtl'
           className='custom-text-align-last-right w-full appearance-none justify-self-start rounded-md bg-white pr-1 pl-3 text-right text-base text-gray-700 focus-visible:outline-0 focus-visible:-outline-offset-2 sm:text-sm/6'
           onChange={(e) => {

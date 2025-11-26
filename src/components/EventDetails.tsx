@@ -1,36 +1,41 @@
 import { Button } from './ui/button';
 import { SelectEventType } from './SelectEventType';
-import { useState } from 'react';
-import { useEventsStore, useStatesStore } from '@/stores/zuStore';
-import type { Event } from '@/types';
-import { nanoid } from 'nanoid';
-import { scheduleBasicNotification } from '@/lib/localNotifications';
+import { useMemo, useState } from 'react';
+import { useEventsStore } from '@/stores/zuStore';
 import type { Day } from '@/lib/createYearCalendar';
 import { WheelTimePicker } from './WheelTimePicker';
-import { saveEventsToLocalStorage } from '@/stores/localStore';
 import { SelectDuration } from './SelectDuration';
 import SelectRemindBeforeOne from './SelectRemindBeforeOne';
 import SelectRemindBeforeTwo from './SelectRemindBeforeTwo';
 import Comments from './Comments';
+import { CloseEventDetailsBtn } from './CloseEventDetailsBtn';
+import { AddEventBtn } from './AddEventBtn';
+import { DeleteEventBtn } from './DeleteEventBtn';
+import { UpdEventBtn } from './UpdEventBtn';
 
 export function EventDetails({
   day,
-  events,
-  setIsDetailsOpen,
+  // events,
+  // setIsDetailsOpen,
   variant,
 }: {
   day: Day;
-  events: Event[];
-  setIsDetailsOpen: (isOpen: boolean) => void;
+  // events: Event[];
+  // setIsDetailsOpen: (isOpen: boolean) => void;
   variant: 'forEventsList' | 'forDaySchedule';
 }) {
   const selectedEvent = useEventsStore((state) => state.selectedEvent);
-  const setEvents = useEventsStore((state) => state.setEvents);
   const [isTimePickerOpen, setIsTimePickerOpen] = useState(false);
-  const setIsDayScheduleOpen = useStatesStore(
-    (state) => state.setIsDayScheduleOpen,
-  );
-  const setDefaultEvent = useEventsStore((state) => state.setDefaultEvent);
+  // const isEventEdit = useEventsStore((state) => state.isEventEdit);
+  // const setIsEventEdit = useEventsStore((state) => state.setIsEventEdit);
+  const events = useEventsStore((state) => state.events);
+
+  const isEventChanged = useMemo(() => {
+    return (
+      JSON.stringify(selectedEvent) !==
+      JSON.stringify(events.find((event) => event.id === selectedEvent.id))
+    );
+  }, [selectedEvent, events]);
   return (
     <div className='flex h-full flex-col justify-between pb-10'>
       <div className='border-gray-100 dark:border-white/10'>
@@ -48,7 +53,8 @@ export function EventDetails({
                 {String(selectedEvent.time?.minute).padStart(2, '0')}
               </dd>
             </div>
-            {isTimePickerOpen && !selectedEvent.id && (
+            {/* {isTimePickerOpen && !selectedEvent.id && ( */}
+            {isTimePickerOpen && (
               <div className='absolute top-12 -right-2'>
                 <WheelTimePicker />
                 <Button className='mt-2 w-full shadow-xl'>Закрыть</Button>
@@ -93,69 +99,41 @@ export function EventDetails({
         </dl>
       </div>
 
-      <div className='mt-4 flex gap-2'>
-        <Button
-          variant='outline'
-          className='grow'
-          onClick={() => {
-            if (variant === 'forDaySchedule') {
-              setIsDetailsOpen(false);
-            } else {
-              setIsDayScheduleOpen(false);
-              setIsDetailsOpen(false);
-            }
-            setDefaultEvent();
-          }}
-        >
-          Закрыть
-        </Button>
-        {selectedEvent.id ? (
-          <>
-            <Button
-              variant='destructive'
-              className='grow'
-              onClick={() => {
-                const updEvents: Event[] = events.filter(
-                  (event) => event.id !== selectedEvent.id,
-                );
-                saveEventsToLocalStorage(updEvents);
-                setEvents(updEvents);
-                scheduleBasicNotification({
-                  events: updEvents,
-                });
-                setIsDetailsOpen(false);
-                if (variant === 'forEventsList') {
-                  setIsDayScheduleOpen(false);
-                }
-                setDefaultEvent();
-              }}
-            >
-              Удалить
-            </Button>
-          </>
-        ) : (
-          <Button
-            variant='default'
-            className='grow'
-            onClick={async () => {
-              const updEvents: Event[] = [
-                ...events,
-                {
-                  ...selectedEvent,
-                  id: nanoid(),
-                  dateString: day.dateString,
-                },
-              ];
-              saveEventsToLocalStorage(updEvents);
-              setEvents(updEvents);
-              scheduleBasicNotification({ events: updEvents });
-              setIsDetailsOpen(false);
-            }}
-          >
-            Добавить
+      {/* <div className='mt-4 flex gap-2'>
+        {selectedEvent.id && (
+          <Button variant='outline' className='grow'>
+            Редактировать
           </Button>
         )}
-      </div>
+        <CloseEventDetailsBtn variant={variant} />
+        {selectedEvent.id && <DeleteEventBtn variant={variant} />}
+        {!selectedEvent.id && <AddEventBtn day={day} />}
+      </div> */}
+
+      {selectedEvent.id && !isEventChanged && (
+        <div className='mt-4 grid grid-cols-2 gap-2'>
+          <DeleteEventBtn variant={variant} />
+          <CloseEventDetailsBtn variant={variant} />
+        </div>
+      )}
+      {selectedEvent.id && isEventChanged && (
+        <div className='mt-4 grid grid-cols-2 gap-2'>
+          <UpdEventBtn variant={variant} />
+          <CloseEventDetailsBtn variant={variant} />
+        </div>
+      )}
+      {!selectedEvent.id && (
+        <div className='mt-4 flex gap-2'>
+          <CloseEventDetailsBtn variant={variant} />
+          <AddEventBtn day={day} />
+        </div>
+      )}
+      {/* <div>
+        {JSON.stringify(selectedEvent) ===
+        JSON.stringify(events.find((event) => event.id === selectedEvent.id))
+          ? 'true'
+          : 'false'}
+      </div> */}
     </div>
   );
 }

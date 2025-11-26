@@ -1,11 +1,10 @@
 import { create } from 'zustand';
-import { devtools } from 'zustand/middleware';
+// import { devtools } from 'zustand/middleware';
 import type { Event } from '@/types';
 import { defaultDay, defaultEvent } from '@/constants/eventConstants';
 import type { Day } from '@/lib/createYearCalendar';
 
 interface EventsState {
-  // bears: number;
   events: Event[];
   setEvents: (events: Event[]) => void;
   addEvent: (event: Event) => void;
@@ -18,27 +17,27 @@ interface EventsState {
 }
 
 export const useEventsStore = create<EventsState>()(
-  devtools(
-    ////
-    (set) => ({
-      events: [],
-      setEvents: (events) => set(() => ({ events: events })),
-      addEvent: (event) =>
-        set((state) => ({
-          events: [...state.events, event],
-        })),
-      deleteEvent: (id) =>
-        set((state) => ({
-          events: state.events.filter((event) => event.id !== id),
-        })),
-      selectedEvent: defaultEvent,
-      setSelectedEvent: (event) => set(() => ({ selectedEvent: event })),
-      setDefaultEvent: () => set(() => ({ selectedEvent: defaultEvent })),
-      notificationNum: 0,
-      notificationNumInc: () =>
-        set((state) => ({ notificationNum: state.notificationNum + 1 })),
-    }),
-  ),
+  // devtools(
+  ////
+  (set) => ({
+    events: [],
+    setEvents: (events) => set(() => ({ events: events })),
+    addEvent: (event) =>
+      set((state) => ({
+        events: [...state.events, event],
+      })),
+    deleteEvent: (id) =>
+      set((state) => ({
+        events: state.events.filter((event) => event.id !== id),
+      })),
+    selectedEvent: defaultEvent,
+    setSelectedEvent: (event) => set(() => ({ selectedEvent: event })),
+    setDefaultEvent: () => set(() => ({ selectedEvent: defaultEvent })),
+    notificationNum: 0,
+    notificationNumInc: () =>
+      set((state) => ({ notificationNum: state.notificationNum + 1 })),
+  }),
+  // ),
 );
 
 interface StatesState {
@@ -51,16 +50,16 @@ interface StatesState {
 }
 
 export const useStatesStore = create<StatesState>()(
-  devtools(
-    ////
-    (set) => ({
-      isDayScheduleOpen: false,
-      setIsDayScheduleOpen: (isOpen) =>
-        set(() => ({ isDayScheduleOpen: isOpen })),
-      selectedDay: defaultDay,
-      setSelectedDay: (day) => set(() => ({ selectedDay: day })),
-      isDetailsOpen: false,
-      setIsDetailsOpen: (isOpen) => set(() => ({ isDetailsOpen: isOpen })),
-    }),
-  ),
+  // devtools(
+  ////
+  (set) => ({
+    isDayScheduleOpen: false,
+    setIsDayScheduleOpen: (isOpen) =>
+      set(() => ({ isDayScheduleOpen: isOpen })),
+    selectedDay: defaultDay,
+    setSelectedDay: (day) => set(() => ({ selectedDay: day })),
+    isDetailsOpen: false,
+    setIsDetailsOpen: (isOpen) => set(() => ({ isDetailsOpen: isOpen })),
+  }),
+  // ),
 );

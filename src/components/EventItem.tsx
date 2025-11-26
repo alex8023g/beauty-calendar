@@ -9,6 +9,7 @@ export function EventItem({
   setIsDetailsOpen: (isOpen: boolean) => void;
 }) {
   const setSelectedEvent = useEventsStore((state) => state.setSelectedEvent);
+  // const setIsEventEdit = useEventsStore((state) => state.setIsEventEdit);
   return (
     <li
       style={{
@@ -19,6 +20,7 @@ export function EventItem({
       className='relative z-20 mt-px flex dark:before:pointer-events-none dark:before:absolute dark:before:inset-1 dark:before:z-0 dark:before:rounded-lg dark:before:bg-gray-900'
       onClick={() => {
         setSelectedEvent(event);
+        // setIsEventEdit(false);
         setIsDetailsOpen(true);
       }}
     >
