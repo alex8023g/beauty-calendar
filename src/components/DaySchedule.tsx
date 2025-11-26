@@ -34,7 +34,7 @@ export function DaySchedule({ day }: { day: Day }) {
         </div>
       </header> */}
 
-      <div className='relative isolate flex flex-auto overflow-hidden bg-white dark:bg-gray-900'>
+      <div className='relative isolate flex flex-auto overflow-auto bg-white dark:bg-gray-900'>
         {/* {todayEvents.length > 0 && !isDetailsOpen && (
           <div className='/right-0 absolute top-0 left-0 z-50 m-2 w-[360px] rounded-md bg-blue-300 pl-3 text-sm/6'>
             {todayEvents.map((event) => (

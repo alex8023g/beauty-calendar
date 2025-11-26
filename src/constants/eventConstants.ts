@@ -5,10 +5,11 @@ export const defaultEvent: Event = {
   id: '',
   dateString: '',
   time: { hour: 0, minute: 0 },
-  type: 'Маникюр',
+  type: 'Другое',
   duration: 1,
   reminderOne: 2,
   reminderTwo: 24,
+  comments: '',
 };
 
 export const eventTypes = [
@@ -18,6 +19,7 @@ export const eventTypes = [
   'Косметология',
   'Массаж',
   'Депиляция',
+  'Другое',
 ];
 
 export const defaultDay: Day = {

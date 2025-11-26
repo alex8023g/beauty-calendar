@@ -11,18 +11,15 @@ import { saveEventsToLocalStorage } from '@/stores/localStore';
 import { SelectDuration } from './SelectDuration';
 import SelectRemindBeforeOne from './SelectRemindBeforeOne';
 import SelectRemindBeforeTwo from './SelectRemindBeforeTwo';
+import Comments from './Comments';
 
 export function EventDetails({
   day,
-  // event,
-  // setEvent,
   events,
   setIsDetailsOpen,
   variant,
 }: {
   day: Day;
-  // event: Event;
-  // setEvent: Dispatch<SetStateAction<Event>>;
   events: Event[];
   setIsDetailsOpen: (isOpen: boolean) => void;
   variant: 'forEventsList' | 'forDaySchedule';
@@ -37,7 +34,7 @@ export function EventDetails({
   return (
     <div className='flex h-full flex-col justify-between pb-10'>
       <div className='border-gray-100 dark:border-white/10'>
-        <dl className='divide-y divide-gray-100 dark:divide-white/10'>
+        <dl className='divide-gray-100 not-last:divide-y dark:divide-white/10'>
           <div
             className='relative'
             onClick={() => setIsTimePickerOpen((st) => !st)}
@@ -90,6 +87,9 @@ export function EventDetails({
               <SelectRemindBeforeTwo />
             </dd>
           </div>
+          <div className='py-4'>
+            <Comments />
+          </div>
         </dl>
       </div>
 
@@ -110,32 +110,29 @@ export function EventDetails({
           Закрыть
         </Button>
         {selectedEvent.id ? (
-          <Button
-            variant='destructive'
-            className='grow'
-            onClick={() => {
-              const updEvents: Event[] = events.filter(
-                (event) => event.id !== selectedEvent.id,
-              );
-              // Preferences.set({
-              //   key: 'events',
-              //   value: JSON.stringify(updEvents),
-              // });
-              saveEventsToLocalStorage(updEvents);
-              // deleteEvent(selectedEvent.id);
-              setEvents(updEvents);
-              scheduleBasicNotification({
-                events: updEvents,
-              });
-              setIsDetailsOpen(false);
-              if (variant === 'forEventsList') {
-                setIsDayScheduleOpen(false);
-              }
-              setDefaultEvent();
-            }}
-          >
-            Удалить
-          </Button>
+          <>
+            <Button
+              variant='destructive'
+              className='grow'
+              onClick={() => {
+                const updEvents: Event[] = events.filter(
+                  (event) => event.id !== selectedEvent.id,
+                );
+                saveEventsToLocalStorage(updEvents);
+                setEvents(updEvents);
+                scheduleBasicNotification({
+                  events: updEvents,
+                });
+                setIsDetailsOpen(false);
+                if (variant === 'forEventsList') {
+                  setIsDayScheduleOpen(false);
+                }
+                setDefaultEvent();
+              }}
+            >
+              Удалить
+            </Button>
+          </>
         ) : (
           <Button
             variant='default'
@@ -149,12 +146,7 @@ export function EventDetails({
                   dateString: day.dateString,
                 },
               ];
-              // Preferences.set({
-              //   key: 'events',
-              //   value: JSON.stringify(updEvents),
-              // });
               saveEventsToLocalStorage(updEvents);
-              // addEvent(newEvent);
               setEvents(updEvents);
               scheduleBasicNotification({ events: updEvents });
               setIsDetailsOpen(false);

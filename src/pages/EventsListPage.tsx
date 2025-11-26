@@ -1,3 +1,4 @@
+import Comments from '@/components/Comments';
 import { DaySchedule2 } from '@/components/DaySchedule2';
 import Drawer from '@/components/Drawer';
 import { EventsListItem } from '@/components/EventsListItem';
@@ -36,6 +37,9 @@ export function EventsListPage() {
       <Drawer>
         <DaySchedule2 day={selectedDay} />
       </Drawer>
+      <div className='mt-auto'>
+        <Comments />
+      </div>
     </div>
   );
 }

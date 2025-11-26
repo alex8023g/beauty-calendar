@@ -15,10 +15,6 @@ interface EventsState {
   setDefaultEvent: () => void;
   notificationNum: number;
   notificationNumInc: () => void;
-  // isDayScheduleOpen: boolean;
-  // setIsDayScheduleOpen: (isOpen: boolean) => void;
-  // selectedDay: Day;
-  // setSelectedDay: (day: Day) => void;
 }
 
 export const useEventsStore = create<EventsState>()(
@@ -41,11 +37,6 @@ export const useEventsStore = create<EventsState>()(
       notificationNum: 0,
       notificationNumInc: () =>
         set((state) => ({ notificationNum: state.notificationNum + 1 })),
-      // isDayScheduleOpen: false,
-      // setIsDayScheduleOpen: (isOpen) =>
-      //   set(() => ({ isDayScheduleOpen: isOpen })),
-      // selectedDay: defaultDay,
-      // setSelectedDay: (day) => set(() => ({ selectedDay: day })),
     }),
   ),
 );

@@ -29,6 +29,9 @@ export function EventItem({
         <p className='order-1 font-semibold text-blue-700 dark:text-blue-300'>
           {event.type}
         </p>
+        <pre className='order-2 text-start text-sm text-gray-500'>
+          {event.comments}
+        </pre>
         <p className='text-blue-500 group-hover:text-blue-700 dark:text-blue-400 dark:group-hover:text-blue-300'>
           <time dateTime='2022-01-22T06:00'>
             {String(event.time?.hour).padStart(2, '0')}:

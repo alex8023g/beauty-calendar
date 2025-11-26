@@ -6,4 +6,5 @@ export type Event = {
   duration: number;
   reminderOne: number;
   reminderTwo: number;
+  comments: string;
 };
