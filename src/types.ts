@@ -6,5 +6,5 @@ export type Event = {
   duration: number;
   reminderOne: number;
   reminderTwo: number;
-  comments: string;
+  comments?: string; // was added later and old data may not have this field
 };

@@ -12,8 +12,8 @@ export function EventsListItem({ event }: { event: Event }) {
   );
 
   function getTitle() {
-    const commentsStart = event.comments.substring(0, 15);
-    const commentsLength = event.comments.length;
+    const commentsStart = event.comments?.substring(0, 15);
+    const commentsLength = event.comments?.length ?? 0;
     if (event.type !== 'Другое') {
       return event.type;
     } else {
