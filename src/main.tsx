@@ -9,6 +9,7 @@ import { LocalNotifications } from '@capacitor/local-notifications';
 import { getEventsFromLocalStorage } from './stores/localStore.ts';
 import { EventsListPage } from './pages/EventsListPage.tsx';
 import { RootLayout } from './components/RootLayout.tsx';
+import { EchoPage } from './pages/EchoPage.tsx';
 
 requestNotificationPermissions();
 const events = await getEventsFromLocalStorage();
@@ -24,6 +25,7 @@ createRoot(document.getElementById('root')!).render(
         <Route element={<RootLayout />}>
           <Route path='/' element={<HomePage />} />
           <Route path='/list' element={<EventsListPage />} />
+          <Route path='/echo' element={<EchoPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -15,6 +15,11 @@
 		504EC3121FED79650016851F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 504EC3101FED79650016851F /* LaunchScreen.storyboard */; };
 		50B271D11FEDC1A000F3C39B /* public in Resources */ = {isa = PBXBuildFile; fileRef = 50B271D01FEDC1A000F3C39B /* public */; };
 		A084ECDBA7D38E1E42DFC39D /* Pods_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF277DCFFFF123FFC6DF26C7 /* Pods_App.framework */; };
+		A6386CBA2ED99AB000E73CE5 /* ScreenOrientationPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6386CB92ED99AA800E73CE5 /* ScreenOrientationPlugin.swift */; };
+		A6386CBC2ED99B4D00E73CE5 /* ScreenOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6386CBB2ED99B4C00E73CE5 /* ScreenOrientation.swift */; };
+		A6386CBF2ED99F3200E73CE5 /* EchoPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6386CBE2ED99F2E00E73CE5 /* EchoPlugin.swift */; };
+		A6386CC12ED9A01400E73CE5 /* MyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6386CC02ED9A01400E73CE5 /* MyViewController.swift */; };
+		A6386CC72ED9F25700E73CE5 /* ICloudPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6386CC62ED9F25200E73CE5 /* ICloudPlugin.swift */; };
 		A6DC8DD32EC78B820089856F /* calendarIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = A6DC8DD22EC78B820089856F /* calendarIcon.icon */; };
 /* End PBXBuildFile section */
 
@@ -28,6 +33,11 @@
 		504EC3111FED79650016851F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		504EC3131FED79650016851F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		50B271D01FEDC1A000F3C39B /* public */ = {isa = PBXFileReference; lastKnownFileType = folder; path = public; sourceTree = "<group>"; };
+		A6386CB92ED99AA800E73CE5 /* ScreenOrientationPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenOrientationPlugin.swift; sourceTree = "<group>"; };
+		A6386CBB2ED99B4C00E73CE5 /* ScreenOrientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenOrientation.swift; sourceTree = "<group>"; };
+		A6386CBE2ED99F2E00E73CE5 /* EchoPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EchoPlugin.swift; sourceTree = "<group>"; };
+		A6386CC02ED9A01400E73CE5 /* MyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyViewController.swift; sourceTree = "<group>"; };
+		A6386CC62ED9F25200E73CE5 /* ICloudPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ICloudPlugin.swift; sourceTree = "<group>"; };
 		A6CEB3552ED723D6009F55E6 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		A6CEB3562ED723D6009F55E6 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		A6DC8DD22EC78B820089856F /* calendarIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = calendarIcon.icon; sourceTree = "<group>"; };
@@ -78,6 +88,7 @@
 		504EC3061FED79650016851F /* App */ = {
 			isa = PBXGroup;
 			children = (
+				A6386CB72ED99A6D00E73CE5 /* plugins */,
 				A6F670802EC0C69B00AE601C /* App.entitlements */,
 				50379B222058CBB4000EE86E /* capacitor.config.json */,
 				504EC3071FED79650016851F /* AppDelegate.swift */,
@@ -88,6 +99,7 @@
 				2FAD9762203C412B000D30F8 /* config.xml */,
 				50B271D01FEDC1A000F3C39B /* public */,
 				A6DC8DD22EC78B820089856F /* calendarIcon.icon */,
+				A6386CC02ED9A01400E73CE5 /* MyViewController.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -99,6 +111,41 @@
 				AF51FD2D460BCFE21FA515B2 /* Pods-App.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		A6386CB72ED99A6D00E73CE5 /* plugins */ = {
+			isa = PBXGroup;
+			children = (
+				A6386CC52ED9F20B00E73CE5 /* ICloudPlugin */,
+				A6386CBD2ED99F1A00E73CE5 /* EchoPlugin */,
+				A6386CB82ED99A8800E73CE5 /* ScreenOrientation */,
+			);
+			path = plugins;
+			sourceTree = "<group>";
+		};
+		A6386CB82ED99A8800E73CE5 /* ScreenOrientation */ = {
+			isa = PBXGroup;
+			children = (
+				A6386CBB2ED99B4C00E73CE5 /* ScreenOrientation.swift */,
+				A6386CB92ED99AA800E73CE5 /* ScreenOrientationPlugin.swift */,
+			);
+			path = ScreenOrientation;
+			sourceTree = "<group>";
+		};
+		A6386CBD2ED99F1A00E73CE5 /* EchoPlugin */ = {
+			isa = PBXGroup;
+			children = (
+				A6386CBE2ED99F2E00E73CE5 /* EchoPlugin.swift */,
+			);
+			path = EchoPlugin;
+			sourceTree = "<group>";
+		};
+		A6386CC52ED9F20B00E73CE5 /* ICloudPlugin */ = {
+			isa = PBXGroup;
+			children = (
+				A6386CC62ED9F25200E73CE5 /* ICloudPlugin.swift */,
+			);
+			path = ICloudPlugin;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -218,6 +265,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6386CC72ED9F25700E73CE5 /* ICloudPlugin.swift in Sources */,
+				A6386CBC2ED99B4D00E73CE5 /* ScreenOrientation.swift in Sources */,
+				A6386CBF2ED99F3200E73CE5 /* EchoPlugin.swift in Sources */,
+				A6386CBA2ED99AB000E73CE5 /* ScreenOrientationPlugin.swift in Sources */,
+				A6386CC12ED9A01400E73CE5 /* MyViewController.swift in Sources */,
 				504EC3081FED79650016851F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -367,7 +419,7 @@
 				INFOPLIST_FILE = App/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 2.1;
+				MARKETING_VERSION = 2.2;
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" \"-DDEBUG\"";
 				PRODUCT_BUNDLE_IDENTIFIER = beauty.calendar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -389,7 +441,7 @@
 				INFOPLIST_FILE = App/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 2.1;
+				MARKETING_VERSION = 2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = beauty.calendar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "";
